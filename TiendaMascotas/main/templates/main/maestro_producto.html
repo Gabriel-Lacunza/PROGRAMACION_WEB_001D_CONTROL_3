@@ -51,11 +51,7 @@
 							</tr>
 							<tr>
 								<td><strong>Categoria:</strong></td>
-								<td><select name="" id="cbox1">
-									<option value="0"></option>
-									<option value="1">Perros</option>
-									<option value="2">Gatos</option>
-								</select></td>
+								<td>{{form.categoriaProducto}}</td>
 							</tr>
 							<tr>
 								<td><strong>Nombre:</strong></td>
@@ -110,14 +106,22 @@
 									<th>ID</th>
 									<th>Categoria</th>
 									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>$Precio</th>
-									<th>%Descuento subscripción</th>
-									<th>%Descuento oferta</th>
+									<th>Estado</th>
 								</tr>
 							</thead>
-							<tbody id="rep">
-									  
+							<tbody id="res">
+								{% for i in p %}
+									<tr>
+										<th>{{i.idProduco}}</th>
+										<th>{{i.categoria}}</th>
+										<th>{{i.nombreProducto}}</th>
+										{% if i.disponibilidadProducto == True %}
+											<th>PRODUCTO DISPONIBLE</th>
+										{% else %}
+											<th>PRODUCTO NO DISPONIBLE</th>
+										{% endif %}
+									</tr>
+								{% endfor %}
 							</tbody>
 						</table>					
 					</div>

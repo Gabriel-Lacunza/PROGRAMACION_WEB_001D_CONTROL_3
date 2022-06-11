@@ -52,50 +52,38 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-                                    <td><input type="checkbox" id=""></td>
-                                    <td>Perro</td>
-                                    <td>Saco Royan Canin 3kg</td>
-                                    <td>$8.000</td>
-                                    <td>0%</td>
-                                    <td>2%</td>
-                                    <td>$7.840</td>
-                                    <td>
-                                        <button><a>Eliminar</a></button>
-                                    </td>
+                                    <td> </td>
+                                    <td>Categoria</td>
+                                    <td>producto</td>
+                                    <td>precio</td>
+                                    <td>descuento de suscriptor</td>
+                                    <td>descuento del producto</td>
+                                    <td>total</td>
+                                    <td> </td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" id=""></td>
-                                    <td>Perro</td>
-                                    <td>Hueso gris 3kg</td>
-                                    <td>$1.260</td>
-                                    <td>0%</td>
-                                    <td>0%</td>
-                                    <td>$1.000</td>
-                                    <td>
-                                        <button><a>Eliminar</a></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id=""></td>
-                                    <td>Gatos</td>
-                                    <td>Raton de juguete</td>
-                                    <td>$1.000</td>
-                                    <td>0%</td>
-                                    <td>0%</td>
-                                    <td>$1.000</td>
-                                    <td>
-                                        <button><a>Eliminar</a></button>
-                                    </td>
-                                </tr>
+                                {% for i in lista %}
+                                    <tr>
+                                        <td><input type="checkbox" id=""></td>
+                                        <td>{{i.0}}</td>
+                                        <td>{{i.1}}</td>
+                                        <td>${{i.2}}</td>
+                                        <td>0%</td>
+                                        <td>0%</td>
+                                        <td>$1.000</td>
+                                        <td>
+                                            <button><a>Eliminar</a></button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
                     <br>
                     <p class="cart-total right">
                     <div class="span9">
-                        <div>TOTAL&nbsp;<span>&nbsp;$10000&nbsp;&nbsp;</span></div>
+                        <div>TOTAL&nbsp;<span>&nbsp;${{total}}&nbsp;&nbsp;</span></div>
                     </div>
                     </p>
                 </div>

@@ -87,7 +87,7 @@
 				<div class="span2 col">
 					<div class="block">	
 						{{form.imagenUsuario}}	
- 					</div>
+					</div>
 				</div>
 			</section>
 			<section class="main-content">				
@@ -111,14 +111,27 @@
 									<th>Tipo usuario</th>
 									<th>Rut</th>
 									<th>Nombres</th>
-									<th>Apellidos</th>
 									<th>Direccion</th>
 									<th>Con subscripción</th>
 									<th>Imagen</th>
 								</tr>
 							</thead>
 							<tbody id="red">
-									  
+								{% for i in u %}
+									<tr>
+										<th>{{i.idUsuario}}</th>
+										<th>{{i.categoria}}</th>
+										<th>{{i.rutUsuario}}</th>
+										<th>{{i.nombreUsuario}}</th>
+										<th>{{i.direccionUsusario}}</th>
+										{% if i.suscripcionUsusario == True %}
+											<th>USUARIO SUSCRITO</th>
+										{% else %}
+											<th>USUARIO NO SUSCRITO</th>
+										{% endif %}
+										<th>{{i.imagenUsuario}}</th>
+									</tr>
+								{% endfor %}
 							</tbody>
 						</table>
 						<hr>

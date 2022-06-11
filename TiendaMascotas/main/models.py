@@ -14,12 +14,16 @@ class Categoria(models.Model):
 
 #modelo de producto
 class Producto(models.Model):
+    imagenProducto = models.ImageField(default="https://www.cotopaxi.com.ec/sites/default/files/2020-08/BLANCO%20760X440PX_0.png")
     idProduco = models.IntegerField(primary_key=True)
     categoria = models.ForeignKey(Categoria, models.CASCADE, blank=False, null=False)
     nombreProducto = models.CharField(max_length=100, blank=False, null=False)
     precioProducto = models.IntegerField(blank=False, null=False)
-    descripcionProducto = models.CharField(max_length=300, blank=False, null=False)
-    disponibilidadProducto = models.BooleanField(blank=False, null=False)
+    descripcionProducto = models.CharField(max_length=300, blank=False, null=False, default="")
+    disponibilidadProducto = models.BooleanField(blank=False, null=False, default=False)
+    
+    def __str__(self) -> str:
+        return self.nombreProducto
 
 class CategoriaUsuario(models.Model):
     idCategoriaUsusario = models.IntegerField(primary_key=True)
@@ -33,4 +37,4 @@ class Usuario(models.Model):
     direccionUsusario = models.CharField(max_length=100)
     suscripcionUsusario = models.BooleanField()
     contraseñaUsuario = models.CharField(max_length=50)
-    imagenUsuario = models.FileField()
+    imagenUsuario = models.ImageField()

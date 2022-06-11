@@ -26,9 +26,8 @@
 	<link rel="icon" type="image/png" href="../../static/main/themes/images/logo.png">
 </head>
 <body>
-    <body>		
+    <body> 
 		<div id="top-bar" class="container">
-			
 			<div class="row container-fluid">
 					<ul class="user-menu">
 						<a href="/inicioCli" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
@@ -40,32 +39,33 @@
 						<li><a href="/index">Cerrar sesión</a></li>		
 					</ul>
 			</div>
-		</div id="wrapper" class="container">		
+        </div>
+		<div id="wrapper" class="container">
 			<section class="header_text sub">
-			<br>
-            <div style="text-align: center;">
-                <h1>
-                    Ingresar a la tienda
-                </h1>
-            </div>
+                <br>
+                <div style="text-align: center;">
+                    <h1>
+                        Ingresar a la tienda
+                    </h1>
+                </div>
 			</section>			
 			<section class="main-content">				
 				<div class="row">
 					<div class="span4"></div>
 					<div class="span4">
 						<form id="login" name="login" action="#" method="post">
-							<input type="hidden" name="next" value="/">
 							<fieldset>
+                                {% csrf_token %}
 								<div class="control-group">
 									<label class="control-label">Correo</label>
 									<div class="controls">
-										<input name="correo" id="correo" type="text" placeholder="ingresa tu usuario" id="username" class="input-xlarge">
+										{{form.uName}}
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">Contraseña</label>
 									<div class="controls">
-										<input name="constraseña" id="constraseña" type="password" placeholder="ingresa tu contraseña" id="password" class="input-xlarge">
+										{{form.passw}}
 									</div>
 								</div>
 								<div class="control-group">

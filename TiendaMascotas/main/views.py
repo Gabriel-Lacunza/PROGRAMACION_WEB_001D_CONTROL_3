@@ -1,79 +1,117 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .form import *
+from .models import Producto, Usuario
 
 # Create your views here.
 listaProductos = []
+totalPedido = 0
 
 def adminTienda(request):
     return render(request, 'administrar_tienda.html', {})
 
 def carritoCompra(request):
-    """
-    agregar el append a listaProductos al presionar el boton "agregar al carrito"
-    """
-    return render(request, 'carrito_de_compras.html', {})
+    lista = listaProductos
+    t = totalPedido
+    return render(request, 'carrito_de_compras.html', {"lista": lista, "total": t})
 
 def detalleFactura(request):
+    lista = listaProductos
     """
     imprimir lo que listaProductos tenga
     """
-    return render(request, 'detalle_factura.html', {})
+    return render(request, 'detalle_factura.html', {"lista": lista})
 
-def fichaProducto(request):
-    """
-    imprimir el producto seleccionado (por ende agregar requisito para filtrar) y agregar el producto a listaProducto
-    """
-    return render(request, 'administrar_tienda.html', {})
+def fichaProducto(request, idProduco):
+    p = Producto.objects.get(idProduco = idProduco)
+    formu = pedidos
+    total = totalPedido
+
+    if request.method == "POST":
+        formu = pedidos(request.POST)
+        if formu.is_valid():
+            c = formu.cleaned_data["cantidad"]
+            listaProductos.append([p.categoria.nombreCategoria, p.nombreProducto, p.precioProducto*c])
+            total += p.precioProducto*c
+            print(listaProductos)
+        else:
+            formu = pedidos
+    return render(request, 'ficha_producto_anon.html', {"p": p, "form": formu})
 
 def index(request):
-    """
-    que se imprima los productos en la base da datos
-    """
-    return render(request, 'index.html', {})
+    prd = Producto.objects.all()
+    return render(request, 'index.html', {"prd": prd})
 
 def inicioCli(request):
-    """
-    que se imprima los productos en la base da datos
-    """
-    return render(request, 'inicio_cliente.html', {})
+    prd = Producto.objects.all()
+    return render(request, 'inicio_cliente.html', {"prd": prd})
 
 def inventario(request):
-    """
-    que se agreguen / actualizen los datos, 
-    ademas de que se muestren en la lista de abajo
-    agregar formulario de inventario
-    """
-    return render(request, 'inventario.html', {})
+    p = Producto.objects.all()
+
+    if request.method == "POST":
+        form = mantenerdorProducto(request.POST)
+        if form.is_valid():
+            i = form.cleaned_data["idProducto"]
+            c = form.cleaned_data["categoriaProducto"]
+            n = form.cleaned_data["nombreProducto"]
+            can = form.cleaned_data["cantidadProducto"]
+            im = form.cleaned_data["imagenProducto"]
+            pr = Producto(imagenProducto = im, idProduco = i, categoria = c,  nombreProducto = n, cantidadProducto = can)
+            pr.save
+        else:
+            form = mantenerdorProducto
+    return render(request, 'inventario.html', {"form": form, "p": p})
 
 def login(request):
+    form = log
+
+    if request.method == "post":
+        if form.is_valid:
+            return redirect(to=inicioCli)
     """
     que se valide la llegada de un usuario
-    agregar formulario de login
     """
-    return render(request, 'login.html', {})
+    return render(request, 'login.html', {"form": form})
 
 def maestroProducto(request):
     form = mantenerdorProducto
+    p = Producto.objects.all()
+
+    if request.method == "POST":
+        form = mantenerdorProducto(request.POST)
+        if form.is_valid():
+            i = form.cleaned_data["idProducto"]
+            c = form.cleaned_data["categoriaProducto"]
+            n = form.cleaned_data["nombreProducto"]
+            d = form.cleaned_data["descripcionProducto"]
+            pre = form.cleaned_data["precioProducto"]
+            desS = form.cleaned_data["descuentoSuscriptor"]
+            desO = form.cleaned_data["descuentoOferta"]
+            im = form.cleaned_data["imagenProducto"]
+            pr = Producto(imagenProducto = im, idProduco = i, categoria = c,  nombreProducto = n, descripcionProducto = d, precioProducto = pre, descuentoSuscriptor = desS, descuentoOferta = desO)
+            pr.save
+        else:
+            form = mantenerdorProducto
     """
-    que se muestren los productos en la lista de abajo
+    pendiente
     que se agreguen / actualicen los datos
     """
-    return render(request, 'maestro_producto.html', {"form": form})
+    return render(request, 'maestro_producto.html', {"form": form, "p": p})
 
 def maestroUsuario(request):
     form = mantenedorUsuario
+    u = Usuario.objects.all()
     """
-    que la infromacion se muestre en la lista de abajo
     que los datos se agreguen / actualizen
     """
-    return render(request, 'maestro_usuario.html', {"form": form})
+    return render(request, 'maestro_usuario.html', {"form": form, "u": u})
 
 def mainAdmin(request):
+    p = Producto.objects.all()
     """
     que el boton "editar" te lleve a su maestroProducto, con los datos ya cargados
     """
-    return render(request, 'main_administrador.html', {})
+    return render(request, 'main_administrador.html', {"p": p})
 
 def misCompras(request):
     """
