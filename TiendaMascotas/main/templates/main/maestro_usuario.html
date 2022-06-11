@@ -30,11 +30,11 @@
 		<div id="top-bar" class="container">
 			<div class="row container-fluid">
 					<ul class="user-menu">
-						<a href="index" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
-						<li><a href="index">Inicio</a></li>
-						<li><a href="administrar_tienda">Administrar Tienda</a></li>
-						<li><a href="sobre_nosotros">Nosotros</a></li>
-						<li><a href="index">Cerrar Sesión</a></li>		
+						<a href="/maestroUsuario" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="/maestroUsuario">Inicio</a></li>
+						<li><a href="/adminTienda">Administrar Tienda</a></li>
+						<li><a href="/sobreNos">Nosotros</a></li>
+						<li><a href="/index">Cerrar Sesión</a></li>		
 					</ul>
 			</div>
 		</div>
@@ -47,55 +47,48 @@
 					<table>
 						<tr>
 							<td><strong>ID:</strong></td>
-							<td><input type="text"  Placeholder=""></td>
+							<td>{{form.idUsuario}}</td>
 						</tr>
 						<tr>
 							<td><strong>Tipo de usuario:</strong></td>
 							<td>
-								<input class="checkbox" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-								<label class="form-check-label" for="inlineRadio1">Cliente</label>
+								{{form.tipoUsuario}}
 							</td>
-							<td>	
-								<input class="checkbox" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">	
-								<label class="form-check-label" for="inlineRadio2">Admin</label>
-							</td>
-							
 						</tr>
 						<tr>
 							<td><strong>Rut:</strong></td>
-							<td><input type="text"  Placeholder=""></td>
+							<td>{{form.rutUsusario}}</td>
 						</tr>
 						<tr>
 							<td><strong>Nombre:</strong></td>
-							<td><input type="text"  Placeholder=""></td>
+							<td>{{form.nombreUsuario}}</td>
 						</tr>
 						<tr>
 							<td><strong>Direccion:</strong></td>
-							<td><input type="text"  Placeholder=""></td>
+							<td>{{form.direccionUsuario}}</td>
 						</tr>
 						<tr>
 							<td><strong>Con subcripción</strong></td>
 							<td>
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+									{{form.SuscripcionUsuario}}
 									<label class="form-check-label" for="flexCheckDisabled">
-									  Deseo subscrbirme con un aparte de $3000 mensuales y obtener un %5 de descuento en mis compras
+										Deseo subscrbirme con un aparte de $3000 mensuales y obtener un %5 de descuento en mis compras
 									</label>
-								  </div>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td><strong>Contraseña</strong></td>
-							<td><input type="password"  Placeholder=""></td>
+							<td>{{form.contrasenaUsuario}}</td>
 						</tr>
 					</table>
 				</div>
 				<div class="span2 col">
 					<div class="block">	
-						<input class="form-control-file" type="file" name="buscarfoto" id="buscarfoto">	
+						{{form.imagenUsuario}}	
  					</div>
 				</div>
-				
 			</section>
 			<section class="main-content">				
 				<div class="row">

@@ -30,11 +30,11 @@
 		<div id="top-bar" class="container">
 			<div class="row container-fluid">
 					<ul class="user-menu">
-						<a href="index" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
-						<li><a href="index">Inicio</a></li>
-						<li><a href="administrar_tienda">Administrar Tienda</a></li>
-						<li><a href="sobre_nosotros">Nosotros</a></li>
-						<li><a href="index">Cerrar Sesión</a></li>		
+						<a href="/maestroProducto" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="/maestroProducto">Inicio</a></li>
+						<li><a href="/adminTienda">Administrar Tienda</a></li>
+						<li><a href="/sobreNos">Nosotros</a></li>
+						<li><a href="/index">Cerrar Sesión</a></li>		
 					</ul>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 						<thead>
 							<tr>
 								<td><strong>ID:</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.idProducto}}</td>
 							</tr>
 							<tr>
 								<td><strong>Categoria:</strong></td>
@@ -59,23 +59,23 @@
 							</tr>
 							<tr>
 								<td><strong>Nombre:</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.nombreProducto}}</td>
 							</tr>
 							<tr>
 								<td><strong>Descripcion:</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.descripcionProducto}}</td>
 							</tr>
 							<tr>
 								<td><strong>Precio:</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.precioProducto}}</td>
 							</tr>
 							<tr>
 								<td><strong>Descuento subcriptor</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.descuentoSuscriptor}}</td>
 							</tr>
 							<tr>
 								<td><strong>Descuento por oferta:</strong></td>
-								<td><input type="text"  Placeholder=""></td>
+								<td>{{form.descuentoOferta}}</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,8 +85,7 @@
 				</div>
 				<div class="span3 col">
 					<div class="block">		
-						<img src="https://laikamascotas.cl/cdn-cgi/image/format=auto,quality=80,sharpen=1/https://laikapp.s3.amazonaws.com/dev_images_products/76140_152974_Royal_Canin___Maxi_Adulto_1650473979_500x500.jpg" alt="" sizes="" srcset="">
-						<input class="form-control-file" type="file" name="buscarfoto" id="buscarfoto">
+						{{form.imgenProducto}}
 					</div>
 				</div>
 				
