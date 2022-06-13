@@ -14,7 +14,7 @@ class Categoria(models.Model):
 
 #modelo de producto
 class Producto(models.Model):
-    imagenProducto = models.ImageField(default="https://www.cotopaxi.com.ec/sites/default/files/2020-08/BLANCO%20760X440PX_0.png")
+    imagenProducto = models.ImageField(upload_to='images/', default='sinfoto.jpg', null=False, blank=False, verbose_name="Imagen")
     idProduco = models.IntegerField(primary_key=True)
     categoria = models.ForeignKey(Categoria, models.CASCADE, blank=False, null=False)
     nombreProducto = models.CharField(max_length=100, blank=False, null=False)
