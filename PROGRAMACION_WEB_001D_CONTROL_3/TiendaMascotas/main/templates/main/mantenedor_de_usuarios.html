@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap E-commerce Templates</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="../../static/main/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="../../static/main/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
+		<link href="../../static/main/themes/css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="../../static/main/themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="../../static/main/themes/css/main.css" rel="stylesheet"/>
+
+		<!-- scripts -->
+		<script src="../../static/main/themes/js/jquery-1.7.2.min.js"></script>
+		<script src="../../static/main/bootstrap/js/bootstrap.min.js"></script>				
+		<script src="../../static/main/themes/js/superfish.js"></script>	
+		<script src="../../static/main/themes/js/jquery.scrolltotop.js"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="themes/js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="icon" type="image/png" href="../../static/main/themes/images/logo.png">
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<a href="/maestroUsuario" class="logo pull-left"><img src="../../static/main/themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="/maestroUsuario">Inicio</a></li>
+						<li><a href="/adminTienda">Administrar Tienda</a></li>
+						<li><a href="/sobreNos">Nosotros</a></li>
+						<li><a href="/index">Cerrar Sesión</a></li>		
+					</ul>
+			</div>
+		</div>
+		<div id="wrapper" class="container">
+							
+			<section class="main-content">
+			    <br>
+				<h3><span>Mantenedor de usuario</span></h3>
+                <div class="span5">
+					<table>
+						<tr>
+							<td><strong>ID:</strong></td>
+							<td>{{form.idUsuario}}</td>
+						</tr>
+						<tr>
+							<td><strong>Tipo de usuario:</strong></td>
+							<td>
+								{{form.tipoUsuario}}
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Rut:</strong></td>
+							<td>{{form.rutUsusario}}</td>
+						</tr>
+						<tr>
+							<td><strong>Nombre:</strong></td>
+							<td>{{form.nombreUsuario}}</td>
+						</tr>
+						<tr>
+							<td><strong>Direccion:</strong></td>
+							<td>{{form.direccionUsuario}}</td>
+						</tr>
+						<tr>
+							<td><strong>Con subcripción</strong></td>
+							<td>
+								<div class="form-check">
+									{{form.SuscripcionUsuario}}
+									<label class="form-check-label" for="flexCheckDisabled">
+										Deseo subscrbirme con un aparte de $3000 mensuales y obtener un %5 de descuento en mis compras
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Contraseña</strong></td>
+							<td>{{form.contrasenaUsuario}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="span2 col">
+					<div class="block">	
+						{{form.imagenUsuario}}	
+					</div>
+				</div>
+			</section>
+			<section class="main-content">				
+				<div class="row">
+					<div class="span9">	
+						<div class="col1">
+							<button class="btn" id="btn1" onclick="alert('Producto agregado');">
+								Guardar
+							</button>
+							<button class="btn" id="btn2" onclick="alert('Producto creado');">
+								Nuevo
+							</button>
+							<button class="btn" id="btn3" >
+								Eliminar
+							</button>
+						</div>			
+						<table class="table table-bordered" style="border-collapse: 1px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Tipo usuario</th>
+									<th>Rut</th>
+									<th>Nombres</th>
+									<th>Direccion</th>
+									<th>Con subscripción</th>
+									<th>Imagen</th>
+								</tr>
+							</thead>
+							<tbody id="red">
+								{% for i in u %}
+									<tr>
+										<th>{{i.idUsuario}}</th>
+										<th>{{i.categoria}}</th>
+										<th>{{i.rutUsuario}}</th>
+										<th>{{i.nombreUsuario}}</th>
+										<th>{{i.direccionUsusario}}</th>
+										{% if i.suscripcionUsusario == True %}
+											<th>USUARIO SUSCRITO</th>
+										{% else %}
+											<th>USUARIO NO SUSCRITO</th>
+										{% endif %}
+										<th>{{i.imagenUsuario}}</th>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<hr>
+						<hr/>					
+					</div>
+				</div>
+			</section>			
+		</div>
+		<script src="../../static/main/themes/js/common.js"></script>
+		<script src="../../static/main/js/ajax1.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#checkout').click(function (e) {
+					document.location.href = "checkout";
+				})
+			});
+		</script>		
+    </body>
+</html>
