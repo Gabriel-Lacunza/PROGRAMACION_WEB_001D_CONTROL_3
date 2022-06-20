@@ -1,5 +1,6 @@
-from tkinter.tix import Form
 from django import forms
+from django.forms import ModelForm
+from .models import Producto
 
 class formulario_ingresar(forms.Form):
     uName = forms.CharField(max_length=50)
@@ -16,16 +17,10 @@ class formuario_registrar(forms.Form):
     contraseñaRepetida = forms.CharField(max_length=50)
     imagen = forms.ImageField()
 
-class mantenerdorProducto(forms.Form):
-    choices = [("0", "---"), ("1", "perro"), ("2", "gato")]
-    idProducto = forms.CharField(max_length=100)
-    categoriaProducto = forms.ChoiceField(choices=choices)
-    nombreProducto = forms.CharField(max_length=100)
-    descripcionProducto = forms.CharField(max_length=500)
-    precioProducto = forms.IntegerField()
-    descuentoSuscriptor = forms.IntegerField(max_value=100)
-    descuentoOferta = forms.IntegerField(max_value=100)
-    imgenProducto = forms.FileField()
+class mantenerdorProducto(ModelForm):
+    class Meta:
+        model = Producto
+        fields = ["imagenProducto", "imagenProducto", "categoria", "nombreProducto", "precioProducto", "descripcionProducto", "disponibilidadProducto"]
 
 class mantenedorUsuario(forms.Form):
     choices = [("1", "cliente"), ("2", "admin")]

@@ -58,8 +58,7 @@ def inicio_usuario_anonimo(request): #listo
     prd = Producto.objects.all()
     return render(request, 'inicio_usuario_anonimo.html', {"prd": prd})
 
-def mantenedor_de_bodega(request): #arreglar formulario en html
-    form = mantenedorBodega
+def mantenedor_de_bodega(request): #confirmar si el formulario en html funciona
     """
     hacer que rellene la base de datos
     """
@@ -81,30 +80,19 @@ def mantenedor_de_bodega(request): #arreglar formulario en html
         form = mantenedorBodega()
     return render(request, 'mantenedor_de_bodega.html', {"form": form, "p": p})
 
-def mantenedor_de_productos(request): #arreglar formulario en html
+def mantenedor_de_productos(request): #confirmar si el formulario en html funciona
     p = Producto.objects.all()
 
-    if request.method == "POST":
-        form = mantenerdorProducto(request.POST)
-        if form.is_valid():
-            i = form.cleaned_data["idProducto"]
-            c = form.cleaned_data["categoriaProducto"]
-            n = form.cleaned_data["nombreProducto"]
-            d = form.cleaned_data["descripcionProducto"]
-            pre = form.cleaned_data["precioProducto"]
-            desS = form.cleaned_data["descuentoSuscriptor"]
-            desO = form.cleaned_data["descuentoOferta"]
-            im = form.cleaned_data["imagenProducto"]
-            pr = Producto(imagenProducto = im, idProduco = i, categoria = c,  nombreProducto = n, descripcionProducto = d, precioProducto = pre, descuentoSuscriptor = desS, descuentoOferta = desO)
-            pr.save()
+    if request.method == "POST": #listo
+        form = mantenerdorProducto(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid:
+            form.save()
     else:
         form = mantenerdorProducto()
-    """ 
-    confirmar que se agreguen / actualicen los datos
-    """
     return render(request, 'mantenedor_de_productos.html', {"form": form, "p": p})
 
-def mantenedor_de_usuarios(request): #arreglar formulario en html
+def mantenedor_de_usuarios(request): #confirmar si el formulario en html funciona
     form = mantenedorUsuario
     u = Usuario.objects.all()
     """
@@ -121,7 +109,7 @@ def mis_compras(request):
     """
     return render(request, 'mis_compras.html', {})
 
-def nosotros(request):
+def nosotros(request): #listo
     return render(request, 'nosotros.html', {})
 
 def registrarse(request): #arreglar formulario en html

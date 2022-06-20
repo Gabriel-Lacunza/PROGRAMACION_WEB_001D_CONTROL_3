@@ -45,40 +45,14 @@
 					<form method="post">
 						<section class="main-content">
 							{% csrf_token %}
-							<table >
-								<tr>
-									<td><strong>ID:</strong></td>
-									<td>{{form.idProducto}}</td>
-								</tr>
-								<tr>
-									<td><strong>Categoria:</strong></td>
-									<td>{{form.categoriaProducto}}</td>
-								</tr>
-								<tr>
-									<td><strong>Nombre:</strong></td>
-									<td>{{form.nombreProducto}} </td>
-								</tr>
-								<tr>
-									<td><strong>Cantidad:</strong></td>
-									<td>{{form.cantidadProducto}}</td>
-								</tr>
-								<tr>
-									<td><strong>Disponible:</strong></td>
-									<td>{{form.disponibilidad}}</td>
-								</tr>
-							</table>
-							<div class="span3 col">
-								<div class="block">		
-									{{form.imagenProducto}}
-								</div>
-							</div>
+							{{form.as_p}}
 						</section>
 						<section class="main-content">				
 							<div class="row">
 								<div class="span9">	
 									<div class="col1">
-										<button name="actualizar" value="actualizar" class="btn" id="btn1" onclick="alert('Producto agregado');">
-											actualizar
+										<button name="actualizar" value="actualizar" class="btn" id="btn1" onclick="alert('Producto actualizado');">
+											Actualizar
 										</button>
 										<button name="nuevo" value="nuevo" class="btn" id="btn2" onclick="alert('Producto creado');">
 											Nuevo

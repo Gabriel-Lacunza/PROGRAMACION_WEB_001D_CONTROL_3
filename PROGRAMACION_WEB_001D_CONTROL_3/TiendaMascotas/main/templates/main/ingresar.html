@@ -56,18 +56,7 @@
 						<form id="login" name="login" action="#" method="post">
 							<fieldset>
                                 {% csrf_token %}
-								<div class="control-group">
-									<label class="control-label">Correo</label>
-									<div class="controls">
-										{{form.uName}}
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Contraseña</label>
-									<div class="controls">
-										{{form.passw}}
-									</div>
-								</div>
+								{{form.as_p}}
 								<div class="control-group">
 									<button type="submit" class="btn btn-primary">ingresar</button>
 									<hr>
