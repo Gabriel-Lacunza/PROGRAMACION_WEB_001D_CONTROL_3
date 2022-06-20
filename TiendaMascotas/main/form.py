@@ -1,10 +1,12 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Producto
 
-class log(forms.Form):
+class formulario_ingresar(forms.Form):
     uName = forms.CharField(max_length=50)
     passw = forms.CharField(max_length=50)
 
-class registrar(forms.Form):
+class formuario_registrar(forms.Form):
     rut = forms.CharField(max_length=10)
     nombres = forms.CharField(max_length=50)
     apellidos = forms.CharField(max_length=50)
@@ -15,18 +17,10 @@ class registrar(forms.Form):
     contraseñaRepetida = forms.CharField(max_length=50)
     imagen = forms.ImageField()
 
-class mantenerdorProducto(forms.Form):
-    choices = [("1", "perro"), ("2", "gato")]
-    idProducto = forms.CharField(max_length=100)
-    categoriaProducto = forms.ChoiceField(choices=choices)
-    nombreProducto = forms.CharField(max_length=100)
-    descripcionProducto = forms.CharField(max_length=500)
-    precioProducto = forms.IntegerField()
-    descuentoSuscriptor = forms.IntegerField(max_value=100)
-    descuentoOferta = forms.IntegerField(max_value=100)
-    imgenProducto = forms.FileField()
-    cantidadProducto = forms.IntegerField()
-    imagenProducto = forms.ImageField()
+class mantenerdorProducto(ModelForm):
+    class Meta:
+        model = Producto
+        fields = ["imagenProducto", "imagenProducto", "categoria", "nombreProducto", "precioProducto", "descripcionProducto", "disponibilidadProducto"]
 
 class mantenedorUsuario(forms.Form):
     choices = [("1", "cliente"), ("2", "admin")]
@@ -34,10 +28,14 @@ class mantenedorUsuario(forms.Form):
     tipoUsuario = forms.ChoiceField(choices=choices, widget=forms.RadioSelect)
     rutUsusario = forms.CharField(max_length=10)
     nombreUsuario = forms.CharField(max_length=50)
-    direccionUsuario = forms.CharField(max_length=500)
+    apellidoUsuario = forms.CharField(max_length=50)
+    direccionUsuario = forms.CharField(max_length=500, widget=forms.Textarea)
     SuscripcionUsuario = forms.BooleanField()
     contrasenaUsuario = forms.CharField(max_length=50, min_length=10)
     imagenUsuario = forms.FileField()
 
-class pedidos(forms.Form):
-    cantidad = forms.IntegerField()
+class mantenedorBodega(forms.Form):
+    choiceCategoria = [("1", "perro"), ("2", "gato")]
+    idBodega = forms.IntegerField()
+    categoriaBodega = forms.ChoiceField()
+    cantidadBodega = forms.IntegerField()
