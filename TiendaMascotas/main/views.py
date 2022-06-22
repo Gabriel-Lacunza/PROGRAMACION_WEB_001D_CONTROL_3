@@ -64,18 +64,11 @@ def mantenedor_de_bodega(request): #confirmar si el formulario en html funciona
     """
     p = Producto.objects.all()
 
-    if request.method == "POST":
-        form = mantenedorBodega(request.POST)
-        
-        if form.is_valid():
-            i = form.cleaned_data["idProducto"]
-            c = form.cleaned_data["categoriaProducto"]
-            n = form.cleaned_data["nombreProducto"]
-            can = form.cleaned_data["cantidadProducto"]
-            im = form.cleaned_data["imagenProducto"]
-            d = form.cleaned_data["disponibilidad"]
-            pr = Producto(imagenProducto = im, idProduco = i, categoria = c,  nombreProducto = n, cantidadProducto = can, disponibilidadProducto = d)
-            pr.save()
+    if request.method == "POST": #listo
+        form = mantenedorBodega(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid:
+            form.save()
     else:
         form = mantenedorBodega()
     return render(request, 'mantenedor_de_bodega.html', {"form": form, "p": p})
@@ -93,11 +86,17 @@ def mantenedor_de_productos(request): #confirmar si el formulario en html funcio
     return render(request, 'mantenedor_de_productos.html', {"form": form, "p": p})
 
 def mantenedor_de_usuarios(request): #confirmar si el formulario en html funciona
-    form = mantenedorUsuario
     u = Usuario.objects.all()
     """
     hacer que los datos se agreguen / actualizen
     """
+    if request.method == "POST":
+        form = formuario_registrar(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid:
+            form.save()
+    else:
+        form = formuario_registrar()
     return render(request, 'mantenedor_de_usuarios.html', {"form": form, "u": u})
 
 def menu_de_administracion(request): #listo
@@ -113,8 +112,14 @@ def nosotros(request): #listo
     return render(request, 'nosotros.html', {})
 
 def registrarse(request): #arreglar formulario en html
-    form = formuario_registrar
     """
     que se guarde la informacion
     """
+    if request.method == "POST":
+        form = formuario_registrar(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid:
+            form.save()
+    else:
+        form = formuario_registrar()
     return render(request, 'registrarse.html', {"form": form})
