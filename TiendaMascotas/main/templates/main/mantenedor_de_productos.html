@@ -43,7 +43,7 @@
 			    <br>
 				<h2><span>Mantenedor de producto</span></h2>
                 <div class="span5">
-					<form action="" method="POST">
+					<form action="" enctype="multipart/form-data" method="POST">
 						{% csrf_token %}
 						{{form.as_p}}
 						<div class="span1">
