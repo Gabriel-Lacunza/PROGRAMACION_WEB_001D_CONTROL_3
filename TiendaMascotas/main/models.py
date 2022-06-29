@@ -1,3 +1,4 @@
+from xml.dom.minidom import Identified
 from django.db import models
 from django.forms import IntegerField
 
@@ -39,11 +40,11 @@ class Usuario(models.Model):
     categoria = models.ForeignKey(CategoriaUsuario, models.CASCADE, blank=False, null=False)
     rutUsuario = models.CharField(max_length=10, unique=True)
     nombreUsuario = models.CharField(max_length=50) 
-    apellidoUsuario = models.CharField(max_length=50, default="0")
+    apellidoUsuario = models.CharField(max_length=50, default="")
     direccionUsusario = models.CharField(max_length=100)
     suscripcionUsusario = models.BooleanField(default=False)
     contraseñaUsuario = models.CharField(max_length=50)
-    imagenUsuario = models.ImageField()
+    imagenUsuario = models.ImageField(upload_to="media/", default="sinfoto.jpg", null=False, blank=False, verbose_name="Imagen")
     
     def __str__(self):
         return self.nombreUsuario

@@ -61,82 +61,12 @@
                                 <h4>Formulario de Registro</h4>
                             </div>
                             <br>
-                            <form class="form-stacked" action="registro.php" method="post" name="registro" id="registro">
+                            <form class="form-stacked" action="" enctype="multipart/form-data" method="POST" name="registrarse" id="registrarse">
                                 <fieldset>
                                     <div class="row borde-bootstrap-row">
                                         <div class="span6">
-                                            <div class="form-group">
-                                                <label for="rut" class="control-label">RUT</label>
-                                                <div class="controls">
-                                                    {{form.rut}}
-                                                </div>
-                                                <small id="rut-help" class="form-text text-muted">
-                                                    Escribe tu RUT sin puntos y con guión, por ejemplo: 16560241-2
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="nombres" class="control-label">Nombres</label>
-                                                <div class="controls">
-                                                    {{form.nombres}}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apellidos" class="control-label">Apellidos</label>
-                                                <div class="controls">
-                                                    {{form.apellidos}}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="correo" class="control-label">Correo</label>
-                                                <div class="controls">
-                                                    {{form.correo}}
-                                                </div>
-                                                <small id="correo-help" class="form-text text-muted">
-                                                    Escribe tu correo incluyendo: nombre, @ y dominio, por ejemplo: atorres@duocuc.cl
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="direccion" class="control-label">Dirección</label>
-                                                <div class="controls">
-                                                    {{form.direccion}}
-                                                </div>
-                                                <small id="direccion-help" class="form-text text-muted">
-                                                    Escribe tu direción completa con: calle, número, comuna y región
-                                                </small>
-                                            </div>
-                                            <div class="form-check">
-                                                {{form.suscripcion}}
-                                                <label class="form-check-label" for="consubscripcion">Con subscripción</label>
-                                                <small id="consubscripcion-help" class="form-text text-muted">
-                                                    Deseo subscribirme con un aporte de $3.000 mensuales
-                                                    y obtener un 5% de descuento en mis copmpras
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <br>
-                                                <label for="password" class="control-label">Contraseña</label>
-                                                <div class="controls">
-                                                    {{form.contraseña}}
-                                                </div>
-                                                <small id="password-help" class="form-text text-muted">
-                                                    La contraseña debe tener un mínimo de 10 caracteres y 
-                                                    debe contener al menos una mayúscula y un número
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password2" class="control-label">Repetir contraseña</label>
-                                                <div class="controls">
-                                                    {{form.contraseñaRepetida}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="form-group">
-                                                <img src="images/cristian_gomez.jpg" alt="" name="fotoperfil" id="fotoperfil">
-                                                <br>
-                                                <br>
-                                                {{form.imagen}}
-                                            </div>
+                                            {% csrf_token %}
+						                    {{form.as_p}}
                                         </div>
                                     </div>
                                     <div class="row borde-bootstrap-row">

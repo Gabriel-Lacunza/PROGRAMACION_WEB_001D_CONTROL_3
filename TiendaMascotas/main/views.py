@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from .form import *
 from .models import Producto, Usuario
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 listaProductos = []
@@ -31,17 +32,24 @@ def historial_de_ventas(request):
     """
     return render(request, 'historial_de_ventas.html', {})
 
-def ingresar(request): #arreglar formulario en html
-    form = formulario_ingresar
+def ingresar(request):
+    data = {"mesg": "", "form": formulario_ingresar()}
 
-    if request.method == "post":
+    if request.method == "POST":
+        form = formulario_ingresar(request.POST)
         if form.is_valid:
-            return redirect(to=inicio_como_cliente)
-    """
-    que se valide la llegada de un usuario
-    confirmar que te redirija a la pagina inicio cli
-    """
-    return render(request, 'ingresar.html', {"form": form})
+            rutUsuario = request.POST.get("rutUsuario")
+            password = request.POST.get("password")
+            Usuario = authenticate(rutUsuario=rutUsuario, password=password)
+            if Usuario is not None:
+                if Usuario.is_active:
+                    data["mesg"] = "¡a!"
+                    return redirect("/inicio_como_cliente")
+                else:
+                    data["mesg"] = "¡La cuenta o la password no son correctos!"
+            else:
+                data["mesg"] = "¡La cuenta o la password no son correctos!"
+    return render(request, "ingresar.html", data)
 
 def inicio_como_administrador(request):
     p = Producto.objects.all()
@@ -120,6 +128,7 @@ def registrarse(request): #arreglar formulario en html
         print(request.FILES)
         if form.is_valid:
             form.save()
+            return redirect("/ingresar")
     else:
         form = formuario_registrar()
     return render(request, 'registrarse.html', {"form": form})

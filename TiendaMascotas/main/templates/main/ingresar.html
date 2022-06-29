@@ -49,36 +49,49 @@
                     </h1>
                 </div>
 			</section>			
-			<section class="main-content">				
-				<div class="row">
-					<div class="span4"></div>
-					<div class="span4">
-						<form id="login" name="login" action="#" method="post">
-							<fieldset>
-                                {% csrf_token %}
-								{{form.as_p}}
-								<div class="control-group">
-									<button type="submit" class="btn btn-primary">ingresar</button>
-									<hr>
-									<a tabindex="4" href="/registro" title="Registrate">registrate</a>
-                                    &nbsp;
-                                    &nbsp;
-                                    <a href="">olvide mi contraseña</a>
-								</div>
-							</fieldset>
-						</form>				
-					</div>
+			
+        </section>			
+        <section class="main-content">				
+            <div class="row">
+                <div class="span4"></div>
+                <div class="span4">
+                    <form id="login" name="login" action="#" method="post">
+                        <input type="hidden" name="next" value="/">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label">rut Usuario</label>
+                                <div class="controls">
+                                    <input name="rutUsuario" id="rutUsuario" type="text" placeholder="ingresa tu usuario" id="idUsuario" class="input-xlarge">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Contraseña</label>
+                                <div class="controls">
+                                    <input name="constraseña" id="constraseña" type="password" placeholder="ingresa tu contraseña" id="password" class="input-xlarge">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <button type="submit" class="btn btn-primary">ingresar</button>
+                                <hr>
+                                <a tabindex="4" href="#" title="Registrate">registrate</a>
+                                &nbsp;
+                                &nbsp;
+                                <a href="">olvide mi contraseña</a>
+                            </div>
+                        </fieldset>
+                    </form>					
                 </div>
-                <br><br><br>
-                <div style="text-align: center;">
-                    <br>
-                    <br>
-                    <a href="/inicioCli">presiona este link para simular que entraste como cliente</a>
-                    <br>
-                    <br>
-                    <a href="/mainAdmin">presiona este link para simular que entraste como administrador</a>
-                </div>
-            </section>			
+            </div>
+            <br><br><br>
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <a href="inicio_cliente.html">presiona este link para simular que entraste como cliente</a>
+                <br>
+                <br>
+                <a href="main_administrador.html">presiona este link para simular que entraste como administrador</a>
+            </div>
+        </section>
             <section id="footer-bar">
                 <div class="row">
                     <div class="span3">
