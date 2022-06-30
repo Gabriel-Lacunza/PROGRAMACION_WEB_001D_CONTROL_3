@@ -54,7 +54,7 @@
 									<a href="/fichaProducto/{{i.idProduco}}" class="title">{{i.nombreProducto}}</a><br/>
 									<p>{{i.descripcionProducto}}</p>
 									<p class="price">${{i.precioProducto}}</p>	
-									<button href="/fichaProducto/{{i.idProduco}}" class="button"> editar </button>								
+									<a href="{% url 'mantenedorProducto' i.idProduco "upd" %}" class="btn">editar </a>								
 								</div>
 							</li>
 						{% endfor %}

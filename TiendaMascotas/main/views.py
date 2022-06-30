@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from .form import *
-from .models import Producto, Usuario
 from django.contrib.auth import login, logout, authenticate
+from .models import *
 
 # Create your views here.
 listaProductos = []
@@ -34,21 +34,25 @@ def historial_de_ventas(request):
 
 def ingresar(request):
     data = {"mesg": "", "form": formulario_ingresar()}
-
+    user=Usuario
     if request.method == "POST":
         form = formulario_ingresar(request.POST)
         if form.is_valid:
-            rutUsuario = request.POST.get("rutUsuario")
-            password = request.POST.get("password")
-            Usuario = authenticate(rutUsuario=rutUsuario, password=password)
-            if Usuario is not None:
-                if Usuario.is_active:
-                    data["mesg"] = "¡a!"
-                    return redirect("/inicio_como_cliente")
-                else:
-                    data["mesg"] = "¡La cuenta o la password no son correctos!"
-            else:
-                data["mesg"] = "¡La cuenta o la password no son correctos!"
+            try:
+                v_rutUsuario = request.POST.get("rutUser")
+                password = request.POST.get("passw")
+                v_user=Usuario.objects.get(rutUsuario = v_rutUsuario)
+                print( CategoriaUsuario.objects.filter(nombreCategriaUsuario= "usuario"))
+                if v_user.contraseñaUsuario == password:
+                    print(Usuario.categoria)
+                    if v_user.categoria == CategoriaUsuario.objects.get(nombreCategriaUsuario= "usuario"):
+                        print("a")
+                        return redirect(inicio_como_cliente)
+                    elif  v_user.categoria == CategoriaUsuario.objects.get(nombreCategriaUsuario= "administrador"):
+                        print("b")
+                        return redirect(inicio_como_administrador)
+            except:
+                data["mesg"] = "nombre de usuario o contraseña incorrecta"
     return render(request, "ingresar.html", data)
 
 def inicio_como_administrador(request):
@@ -81,17 +85,41 @@ def mantenedor_de_bodega(request): #confirmar si el formulario en html funciona
         form = mantenedorBodega()
     return render(request, 'mantenedor_de_bodega.html', {"form": form, "p": p})
 
-def mantenedor_de_productos(request): #confirmar si el formulario en html funciona
+def mantenedor_de_productos(request, idProducto, action = "ins"):
+    p_s = Producto.objects.get(idProduco = idProducto) #confirmar si el formulario en html funciona
     p = Producto.objects.all()
 
-    if request.method == "POST": #listo
-        form = mantenerdorProducto(request.POST, request.FILES)
-        print(request.FILES)
-        if form.is_valid:
-            form.save()
-    else:
-        form = mantenerdorProducto()
-    return render(request, 'mantenedor_de_productos.html', {"form": form, "p": p})
+    data = {"mesg": "", "form": ficha_producto, "action": action, "id": idProducto}
+
+    if action == 'ins':
+        if request.method == "POST":
+            form = mantenerdorProducto(request.POST, request.FILES)
+            if form.is_valid:
+                try:
+                    form.save()
+                    data["mesg"] = "el producto fue agregado"
+                except:
+                    data["mesg"] = "no se ha agregado"
+
+    elif action == 'upd':
+        objeto = Producto.objects.get(idProduco=idProducto)
+        if request.method == "POST":
+            form = mantenerdorProducto(data=request.POST, files=request.FILES, instance=objeto)
+            if form.is_valid:
+                form.save()
+                data["mesg"] = "el producto se actualizo"
+        data["form"] = mantenerdorProducto(instance=objeto)
+
+    elif action == 'del':
+        try:
+            Producto.objects.get(idProduco=idProducto).delete()
+            data["mesg"] = "¡El vehículo fue eliminado correctamente!"
+            return redirect(mantenedor_de_productos, action='ins', idProduco = '-1')
+        except:
+            data["mesg"] = "el producto no existia"
+
+    data["list"] = Producto.objects.all().order_by('idProduco')
+    return render(request, "mantenedor_de_productos.html", data)
 
 def mantenedor_de_usuarios(request): #confirmar si el formulario en html funciona
     u = Usuario.objects.all()

@@ -43,20 +43,18 @@
 			    <br>
 				<h2><span>Mantenedor de producto</span></h2>
                 <div class="span5">
-					<form action="" enctype="multipart/form-data" method="POST">
-						{% csrf_token %}
-						{{form.as_p}}
-						<div class="span1">
-							<button class="btn" id="btn1" onclick="alert('Producto actualizado');">
-								actualizado
-							</button>
-							<button type="submit" class="btn" id="btn2" onclick="alert('Producto creado');">
-								Nuevo
-							</button>
-							<button class="btn" id="btn3" >
-								Eliminar
-							</button>
-						</div>	
+					<form method="POST" action="" enctype="multipart/form-data" id="formulario">
+						<div class="form-group">
+							{% csrf_token %} {{ form.as_p }}
+						</div>
+						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
+						<a class="btn btn-success btnwidth" href="{% url 'mantenedorProducto' 1 'ins'  %}">Nuevo</a>
+						{% if id != '-1' %}
+						<a class="btn btn-danger btnwidth" href="{% url 'mantenedorProducto' id 'del'  %}">Eliminar</a>
+						{% endif %}
+						{% if mesg %}
+						<div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+						{% endif %}
 					</form>
 				</div>
 			</section>

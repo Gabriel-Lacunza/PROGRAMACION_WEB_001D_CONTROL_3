@@ -37,7 +37,7 @@ class CategoriaUsuario(models.Model):
 
 class Usuario(models.Model):
     idUsuario = models.IntegerField(primary_key=True)
-    categoria = models.ForeignKey(CategoriaUsuario, models.CASCADE, blank=False, null=False)
+    categoria = models.ForeignKey(CategoriaUsuario, models.CASCADE, default=2)
     rutUsuario = models.CharField(max_length=10, unique=True)
     nombreUsuario = models.CharField(max_length=50) 
     apellidoUsuario = models.CharField(max_length=50, default="")
