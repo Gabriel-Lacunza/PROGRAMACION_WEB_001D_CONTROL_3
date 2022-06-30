@@ -7,7 +7,7 @@ from .models import *
 
 class formulario_ingresar(forms.Form):
     rutUser = forms.CharField(max_length=50)
-    passw = forms.CharField(max_length=50)
+    passw = forms.CharField(widget=forms.PasswordInput(), max_length=50)
     class Meta:
         fields =["rutUser","passw"]
 
