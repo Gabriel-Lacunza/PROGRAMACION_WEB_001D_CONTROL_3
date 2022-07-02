@@ -48,7 +48,7 @@
 							{% csrf_token %} {{ form.as_p }}
 						</div>
 						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
-						<a class="btn btn-success btnwidth" href="{% url 'mantenedorProducto' 1 'ins'  %}">Nuevo</a>
+						<a class="btn btn-success btnwidth" href="{% url 'mantenedorProducto' -1 'ins'  %}">Nuevo</a>
 						{% if id != '-1' %}
 						<a class="btn btn-danger btnwidth" href="{% url 'mantenedorProducto' id 'del'  %}">Eliminar</a>
 						{% endif %}
@@ -67,22 +67,28 @@
 									<th>ID</th>
 									<th>Categoria</th>
 									<th>Nombre</th>
-									<th>Estado</th>
+									<th>precio</th>
+									<th>descripcion</th>
+									<th>imagen</th>
+									<th class="titulo_boton">Editar</th>
+            						<th class="titulo_boton">Eliminar</th>
 								</tr>
 							</thead>
 							<tbody id="res">
 								{% for i in p %}
-									<tr>
-										<th>{{i.idProduco}}</th>
-										<th>{{i.categoria}}</th>
-										<th>{{i.nombreProducto}}</th>
-										{% if i.disponibilidadProducto == True %}
-											<th>PRODUCTO DISPONIBLE</th>
-										{% else %}
-											<th>PRODUCTO NO DISPONIBLE</th>
-										{% endif %}
-									</tr>
+								<tr>
+									<th>{{ i.idProduco }}</th>
+									<th>{{ i.categoria }}</th>
+									<th>{{ i.nombreProducto }}</th>
+									<th>{{ i.precioProducto }}</th>
+									<th>{{ i.descripcionProducto }}</th>
+									<th><img src="{{ i.imagenProducto.url }}" style="height: 80px;" alt=""></th>
+									<th><a href="{% url 'mantenedorProducto' i.idProduco 'upd' %}" 
+										class="btn btn-primary btn-sm boton_chico">Editar</a></th>
+									<th><a href="{% url 'mantenedorProducto' i.idProduco 'del' %}" 
+										class="btn btn-danger btn-sm boton_chico">Eliminar</a></th>
 								{% endfor %}
+								</tr>
 							</tbody>
 						</table>					
 					</div>

@@ -85,16 +85,18 @@ def mantenedor_de_bodega(request): #confirmar si el formulario en html funciona
         form = mantenedorBodega()
     return render(request, 'mantenedor_de_bodega.html', {"form": form, "p": p})
 
-def mantenedor_de_productos(request, idProducto, action = "ins"):
-    p_s = Producto.objects.get(idProduco = idProducto) #confirmar si el formulario en html funciona
+def mantenedor_de_productos(request,idProducto,action):
+    #p_s = Producto.objects.get(idProduco = idProducto) #confirmar si el formulario en html funciona
     p = Producto.objects.all()
 
-    data = {"mesg": "", "form": ficha_producto, "action": action, "id": idProducto}
+    data = {"mesg": "", "form": mantenerdorProducto, "action": action, "id": idProducto, "p": p}
 
-    if action == 'ins':
+    if action == 'ins': 
         if request.method == "POST":
             form = mantenerdorProducto(request.POST, request.FILES)
+            print("a    ")
             if form.is_valid:
+                print("b")
                 try:
                     form.save()
                     data["mesg"] = "el producto fue agregado"
@@ -119,21 +121,45 @@ def mantenedor_de_productos(request, idProducto, action = "ins"):
             data["mesg"] = "el producto no existia"
 
     data["list"] = Producto.objects.all().order_by('idProduco')
-    return render(request, "mantenedor_de_productos.html", data)
+    return render(request,"mantenedor_de_productos.html", data)
 
-def mantenedor_de_usuarios(request): #confirmar si el formulario en html funciona
+def mantenedor_de_usuario(request,idUsuario,action):
+    #p_s = Producto.objects.get(idProduco = idProducto) #confirmar si el formulario en html funciona
     u = Usuario.objects.all()
-    """
-    hacer que los datos se agreguen / actualizen
-    """
-    if request.method == "POST":
-        form = formuario_registrar(request.POST, request.FILES)
-        print(request.FILES)
-        if form.is_valid:
-            form.save()
-    else:
-        form = formuario_registrar()
-    return render(request, 'mantenedor_de_usuarios.html', {"form": form, "u": u})
+
+    data = {"mesg": "", "form": M_usuario , "action": action, "id": idUsuario, "u": u}
+
+    if action == 'ins': 
+        if request.method == "POST":
+            form = M_usuario(request.POST, request.FILES)
+            print("a    ")
+            if form.is_valid:
+                print("b")
+                try:
+                    form.save()
+                    data["mesg"] = "el usuario fue agregado"
+                except:
+                    data["mesg"] = "no se ha agregado"
+
+    elif action == 'upd':
+        objeto = Usuario.objects.get(idUsuario=idUsuario)
+        if request.method == "POST":
+            form = M_usuario(data=request.POST, files=request.FILES, instance=objeto)
+            if form.is_valid:
+                form.save()
+                data["mesg"] = "el Usuario se actualizo"
+        data["form"] = M_usuario(instance=objeto)
+
+    elif action == 'del':
+        try:
+            Usuario.objects.get(idUsuario=idUsuario).delete()
+            data["mesg"] = "¡El Usuario fue eliminado correctamente!"
+            return redirect(mantenedor_de_usuario, action='ins', idUsuario = '-1')
+        except:
+            data["mesg"] = "el Usuario no existia"
+
+    data["list"] = Producto.objects.all().order_by('idProduco')
+    return render(request,"mantenedor_de_usuarios.html", data)
 
 def menu_de_administracion(request): #listo
     return render(request, 'menu_de_administracion.html', {})

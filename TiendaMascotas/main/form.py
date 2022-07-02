@@ -16,10 +16,15 @@ class formuario_registrar(ModelForm):
         model = Usuario
         fields = ["idUsuario", "rutUsuario", "nombreUsuario", "apellidoUsuario", "direccionUsusario", "suscripcionUsusario", "contraseñaUsuario", "imagenUsuario"]
 
+class M_usuario(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ["idUsuario", "rutUsuario", "nombreUsuario", "apellidoUsuario", "direccionUsusario", "suscripcionUsusario", "contraseñaUsuario", "imagenUsuario"]
+
 class mantenerdorProducto(ModelForm):
     class Meta:
         model = Producto
-        fields = ["imagenProducto", "imagenProducto", "categoria", "nombreProducto", "precioProducto", "descripcionProducto", "disponibilidadProducto"]
+        fields = ["imagenProducto", "idProduco", "categoria", "nombreProducto", "precioProducto", "descripcionProducto", "disponibilidadProducto"]
 
 class mantenedorBodega(forms.Form):
     class Meta:

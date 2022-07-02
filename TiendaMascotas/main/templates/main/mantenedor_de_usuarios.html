@@ -43,21 +43,21 @@
 			<section class="main-content">
 			    <br>
 				<h3><span>Mantenedor de usuario</span></h3>
-                <form action="" method="post">
-					{% csrf_token %}
-					{{form.as_p}}
-					<div class="col1">
-						<button class="btn" id="btn1" onclick="alert('Producto agregado');">
-							Guardar
-						</button>
-						<button class="btn" id="btn2" onclick="alert('Producto creado');">
-							Nuevo
-						</button>
-						<button class="btn" id="btn3" >
-							Eliminar
-						</button>
-					</div>
-				</form>
+                <div class="span5">
+					<form method="POST" action="" enctype="multipart/form-data" id="formulario">
+						<div class="form-group">
+							{% csrf_token %} {{ form.as_p }}
+						</div>
+						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
+						<a class="btn btn-success btnwidth" href="{% url 'mantenedorUsuario' -1 'ins'  %}">Nuevo</a>
+						{% if id != '-1' %}
+						<a class="btn btn-danger btnwidth" href="{% url 'mantenedorUsuario' id 'del'  %}">Eliminar</a>
+						{% endif %}
+						{% if mesg %}
+						<div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+						{% endif %}
+					</form>
+				</div>
 			</section>
 			<section class="main-content">				
 				<div class="row">
@@ -71,7 +71,10 @@
 									<th>Nombres</th>
 									<th>Direccion</th>
 									<th>Con subscripción</th>
+									<th>contraseña</th>
 									<th>Imagen</th>
+									<th>Editar</th>
+									<th>Eliminar</th>
 								</tr>
 							</thead>
 							<tbody id="red">
@@ -87,7 +90,16 @@
 										{% else %}
 											<th>USUARIO NO SUSCRITO</th>
 										{% endif %}
-										<th>{{i.imagenUsuario}}</th>
+										<th>{{i.contraseñaUsuario}}</th>
+										{% if i.imagenUsuario != "sinfoto.jpg" %}
+											<th><img src="{{ i.imagenUsuario.url }}" style="height: 80px;" alt=""></th>
+										{% else %}
+											<th>Sin imagen</th>
+										{% endif %}
+										<th><a href="{% url 'mantenedorUsuario' i.idUsuario 'upd' %}" 
+											class="btn btn-primary btn-sm boton_chico">Editar</a></th>
+										<th><a href="{% url 'mantenedorUsuario' i.idUsuario 'del' %}" 
+											class="btn btn-danger btn-sm boton_chico">Eliminar</a></th>
 									</tr>
 								{% endfor %}
 							</tbody>
