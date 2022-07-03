@@ -39,7 +39,6 @@ urlpatterns = [
     path('nosotros/', nosotros, name='nosotros'),
     path('registrarse/', registrarse, name='registrarse'),
     path('administrarTienda/', administrar_tienda, name="administrarTienda/"),
-    path('mantenedorProductos/', mantenedor_de_productos_general, name='mantenedorProductos'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('salir', salir, name="salir")
 ]
