@@ -1,11 +1,13 @@
 from django.shortcuts import redirect, render
 from .form import *
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from .models import *
 
 # Create your views here.
 listaProductos = []
 totalPedido = 0
+
 
 def carrito_de_compras(request): 
     """
@@ -27,9 +29,8 @@ def ficha_producto(request, idProduco): #listo
     return render(request, 'ficha_producto.html', {"p": p})
 
 def historial_de_ventas(request):
-    """
-    ver como hacer la pagina
-    """
+    
+    v = factura.objects.all()
     return render(request, 'historial_de_ventas.html', {})
 
 def ingresar(request):
@@ -67,7 +68,7 @@ def inicio_como_cliente(request): #listo
     prd = Producto.objects.all()
     print(id)
     return render(request, 'inicio_como_cliente.html', {"prd": prd})
-
+@login_required(login_url='ingresar/')
 def inicio_usuario_anonimo(request): #listo
     prd = Producto.objects.all()
     return render(request, 'inicio_usuario_anonimo.html', {"prd": prd})
@@ -188,3 +189,15 @@ def registrarse(request): #arreglar formulario en html
     else:
         form = formuario_registrar()
     return render(request, 'registrarse.html', {"form": form})
+
+def administrar_tienda(request):
+    return render(request, 'administrar_tienda.html', {})
+
+def mantenedor_de_productos_general(request):
+    #p_s = Producto.objects.get(idProduco = idProducto) #confirmar si el formulario en html funciona
+    p = Producto.objects.all()
+    return render(request,"mantenedor_de_productos_general.html")
+
+def salir(request):
+    logout(request)
+    return redirect('/ingresar')
