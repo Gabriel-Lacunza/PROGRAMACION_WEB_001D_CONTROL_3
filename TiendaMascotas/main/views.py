@@ -47,6 +47,7 @@ def ingresar(request):
                     print(Usuario.categoria)
                     if v_user.categoria == CategoriaUsuario.objects.get(nombreCategriaUsuario= "usuario"):
                         print("a")
+                        print(v_user.idUsuario)
                         return redirect(inicio_como_cliente)
                     elif  v_user.categoria == CategoriaUsuario.objects.get(nombreCategriaUsuario= "administrador"):
                         print("b")
@@ -64,6 +65,7 @@ def inicio_como_administrador(request):
 
 def inicio_como_cliente(request): #listo
     prd = Producto.objects.all()
+    print(id)
     return render(request, 'inicio_como_cliente.html', {"prd": prd})
 
 def inicio_usuario_anonimo(request): #listo

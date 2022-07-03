@@ -19,7 +19,7 @@ class formuario_registrar(ModelForm):
 class M_usuario(ModelForm):
     class Meta:
         model = Usuario
-        fields = ["idUsuario", "rutUsuario", "nombreUsuario", "apellidoUsuario", "direccionUsusario", "suscripcionUsusario", "contraseñaUsuario", "imagenUsuario"]
+        fields = ["rutUsuario", "nombreUsuario", "apellidoUsuario", "direccionUsusario", "suscripcionUsusario", "contraseñaUsuario", "imagenUsuario"]
 
 class mantenerdorProducto(ModelForm):
     class Meta:
