@@ -65,6 +65,7 @@ class Usuario(AbstractBaseUser):
     imagenUsuario = models.ImageField(upload_to="media/", default="sinfoto.jpg", null=False, blank=False, verbose_name="Imagen")
 
     USERNAME_FIELD = 'rutUsuario'
+    password='contraseñaUsuario'
     REQUIRED_FIELDS = ['nombreUsuario', 'apellidoUsuario']
 
     def __str__(self):
