@@ -40,7 +40,8 @@ urlpatterns = [
     path('registrarse/', registrarse, name='registrarse'),
     path('administrarTienda/', administrar_tienda, name="administrarTienda/"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('salir', salir, name="salir")
+    path('salir', salir, name="salir"),
+    path("api/", include('rest_productos.urls'))
 ]
 
 if settings.DEBUG:
