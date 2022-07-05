@@ -69,8 +69,8 @@
 				<table id="tabla_datos">
 				<thead>
 					<tr>
-						<th>ID Producto</th>
-						<th>Nombre</th>
+						<th>ID Usuario</th>
+						<th>Username</th>
 						<th>Descripcion</th>
 
 						<th class="titulo_boton">Editar</th>
@@ -83,7 +83,7 @@
 						<tr>
 							<td>{{ pro.user.id }}</td>
 							<td>{{ pro.user.username }}</td>
-							<td>{{ pro.rutUsuario}}</td>	
+							<td>{{ pro.user.first_name}}</td>	
 							<td><a href="{% url 'maestro_usuario' 'upd' pro.user.id %}" 
 								class="btn btn-primary btn-sm boton_chico">Editar</a></td>
 							<td><a href="{% url 'maestro_usuario' 'upd' pro.user.id %}" 
