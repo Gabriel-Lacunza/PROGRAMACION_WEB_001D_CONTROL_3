@@ -20,4 +20,7 @@ urlpatterns = [
     path('maestro_usuario/<action>/<id>', maestro_usuario, name="maestro_usuario"),
     path('mi_perfil', mi_perfil, name="mi_perfil"),
     path('compra_exitosa/<action>/<id>', compra_exitosa, name="compra_exitosa"),
+    path('carrito', carrito, name="carrito"),
+    path('mis_compras', mis_compras, name="mis_compras"),
+    path('detalle_factura', detalle_factura, name="detalle_factura"),
 ]

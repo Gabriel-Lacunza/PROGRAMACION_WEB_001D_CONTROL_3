@@ -221,3 +221,12 @@ def compra_exitosa(request,id):
         return render(request, "core/pago_exitoso.html", context)
     else:
         return redirect(home)
+
+def carrito(request):
+    return render(request, "core/carrito.html")
+
+def mis_compras(request):
+    return render(request, "core/mis_compras.html")
+
+def detalle_factura(request):
+    return render(request, "core/detalle_factura.html")

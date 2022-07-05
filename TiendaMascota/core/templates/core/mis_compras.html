@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -7,44 +8,50 @@
 		<meta name="description" content="">
 		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
 		<!-- bootstrap -->
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
-		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="../../static/core/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="../../static/core/css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 		
-		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+		<link href="../../static/core/css/themes/css/bootstrappage.css" rel="stylesheet"/>
 		
 		<!-- global styles -->
-		<link href="themes/css/flexslider.css" rel="stylesheet"/>
-		<link href="themes/css/main.css" rel="stylesheet"/>
+		<link href="../../static/core/css/themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="../../static/core/css/themes/css/main.css" rel="stylesheet"/>
 
 		<!-- scripts -->
-		<script src="themes/js/jquery-1.7.2.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>				
-		<script src="themes/js/superfish.js"></script>	
-		<script src="themes/js/jquery.scrolltotop.js"></script>
+		<script src="../../static/core/css/themes/js/jquery-1.7.2.min.js"></script>
+		<script src="../../static/core/css/bootstrap/js/bootstrap.min.js"></script>				
+		<script src="../../static/core/css/themes/js/superfish.js"></script>	
+		<script src="../../static/core/css/themes/js/jquery.scrolltotop.js"></script>
 		<!--[if lt IE 9]>			
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
-        <link rel="icon" type="image/png" href="themes/images/logo.png">
+		<link rel="icon" type="image/png" href="../../static/core/css/themes/images/logo.png">
 	</head>
     <body>		
 		<div id="top-bar" class="container">
-			
 			<div class="row container-fluid">
 					<ul class="user-menu">
 						<div class="pull-left">
-							<a href="inicio_cliente.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>
+							<a href="index.html" class="logo pull-left"><img src="../../static/core/css/themes/images/logo.png" class="site_logo" alt=""></a>
 						</div>
-						<div class="pull-right">
-							<li><a href="inicio_cliente.html">Inicio</a></li>
-							<li><a href="sobre_nosotros.html">Nosotros</a></li>
-							<li><a href="#">Mis datos</a></li>
-							<li><a href="mis_compras.html">Mis compras</a></li>					
-							<li><a href="carrito_de_compras.html">Carrito</a></li>
-							<li><a href="index.html">Cerrar sesión</a></li>	
-						</div>
-									
-							
+						<div class="pull-right">	
+							<li><a href="{% url 'home' %}">Inicio</a></li>
+							<li><a href="{% url 'sobre_nosotros' %}">Nosotros</a></li>
+							{% if user.is_authenticated %}
+								{% if user.is_staff %}
+									<li><a href="{% url 'mainAdministrador' %}">Main Administrador</a></li>
+								{% endif %}
+								<li><a href="{% url 'mi_perfil' %}">Mi Perfil</a></li>
+								<li><a href="{% url 'mis_datos' user.id %}">Mis Datos</a></li>
+								<li><a href="{% url 'carrito' %}">Carrito</a></li>
+								<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+								<li>{{ user.first_name}}</li>
+							{% else %}
+								<li><a href="{% url 'registrar_usuario' %}">Registrate</a></li>
+								<li><a href="{% url 'iniciar_sesion' %}">Ingresar</a></li>
+							{% endif %}
+						</div>			
 					</ul>
 			</div>
 		</div>
@@ -72,7 +79,7 @@
 								<th>1/1/2022</th>
 								<th>$15.000</th>
 								<th>Entregado</th>
-								<th><a href="detalle_factura.html">Ver detalle</a></th>
+								<th><a href="{% url 'detalle_factura' %}">Ver detalle</a></th>
 							</tr>
 							<tr>
 								<th>535</th>
