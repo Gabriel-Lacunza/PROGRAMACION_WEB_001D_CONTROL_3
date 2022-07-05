@@ -161,19 +161,11 @@ def maestro_usuario(request,action, id):
     if action == 'upd':
         objeto = PerfilUsuario.objects.get(user_id=id)
         if request.method == "POST":
-            form = PerfilUsuarioForm(data=request.POST, files=request.FILES, instance=objeto)
+            form = MantUsuarios(data=request.POST, files=request.FILES, instance=objeto)
             if form.is_valid:
                 form.save()
                 data["mesg"] = "¡El Producto fue actualizado correctamente!"
-        data["form"] = PerfilUsuarioForm()
- 
-    elif action == 'del':
-        try:
-            Producto.objects.get(idProducto=id).delete()
-            data["mesg"] = "¡El Producto fue eliminado correctamente!"
-            return redirect(Producto, action='ins', id = '-1')
-        except:
-            data["mesg"] = "¡El Producto ya estaba eliminado!"
+        data["form"] = MantUsuarios()
     data["list"] = PerfilUsuario.objects.all().order_by('user_id')
     return render(request, "core/maestro_usuario.html", data)
 

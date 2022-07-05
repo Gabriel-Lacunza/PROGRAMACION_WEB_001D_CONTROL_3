@@ -72,3 +72,15 @@ class Usuarios(UserCreationForm):
                 'suscripcionUsusario',
                 'imagenUsuario',
             ]
+
+class MantUsuarios(Form):
+    user_name = forms.CharField(max_length=150, required=True)
+    is_staff = forms.BooleanField(required=True)
+    is_active = forms.BooleanField(required=True)
+    class Meta:
+        model = User
+        fields = [
+                'username',
+                'is_staff',
+                'is_active',
+            ]
