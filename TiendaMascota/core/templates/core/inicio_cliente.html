@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Shopper</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="../../static/core/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="../../static/core/css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		
+		<link href="../../static/core/css/themes/css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="../../static/core/css/themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="../../static/core/css/themes/css/main.css" rel="stylesheet"/>
+
+		<!-- scripts -->
+		<script src="../../static/core/css/themes/js/jquery-1.7.2.min.js"></script>
+		<script src="../../static/core/css/bootstrap/js/bootstrap.min.js"></script>				
+		<script src="../../static/core/css/themes/js/superfish.js"></script>	
+		<script src="../../static/core/css/themes/js/jquery.scrolltotop.js"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="icon" type="image/png" href="../../static/core/css/themes/images/logo.png">
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<div class="pull-left">
+							<a href="index.html" class="logo pull-left"><img src="../../static/core/css/themes/images/logo.png" class="site_logo" alt=""></a>
+						</div>
+						<div class="pull-right">	
+							<li><a href="{% url 'home' %}">Inicio</a></li>
+							<li><a href="{% url 'sobre_nosotros' %}">Nosotros</a></li>
+							{% if user.is_authenticated %}
+								{% if user.is_staff %}
+									<li><a href="{% url 'mainAdministrador' %}">Main Administrador</a></li>
+								{% endif %}
+								<li><a href="{% url 'mi_perfil' %}">Mi Perfil</a></li>
+								<li><a href="{% url 'mis_datos' user.id %}">Mis Datos</a></li>
+								<li><a href="{% url 'mis_datos' user.id %}">Mis Compras</a></li>
+								<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+								<li>{{ user.first_name}}</li>
+							{% else %}
+								<li><a href="{% url 'registrar_usuario' %}">Registrate</a></li>
+								<li><a href="{% url 'iniciar_sesion' %}">Ingresar</a></li>
+							{% endif %}
+						</div>			
+					</ul>
+			</div>
+		</div>
+		<div id="wrapper" class="container">
+			<section  class="homepage-slider" id="home-slider">
+				<div class="flexslider">
+					<ul class="slides">
+						<li>
+							<img src="../../static/core/css/themes/images/carousel/banner-1.jpg" alt="" />
+						</li>
+						<li>
+							<img src="../../static/core/css/themes/images/carousel/banner-2.png" alt="" />
+						</li>
+					</ul>
+				</div>			
+			</section>
+			<section class="header_text">
+				Bienvenido a Shopper tu tienda amigable de mascotas
+			</section>
+			<!--<section class="main-content">-->
+					<div class="row">
+								{% if messages == 'No'%}
+									<div class="alert alert-secondary header_text" role="informaci" align="center">
+									<h1>NO HAY PRODUCTOS DISPONIBLES</h1>
+									</div>
+								{% endif %}															
+								{% for pro in list %}
+									<li class="span2">
+										<div class="product-box">
+											<span class="sale_tag"></span>												
+											<a href="{% url 'producto_ficha' pro.idProducto %}"><img alt="" src="/media/{{ pro.imagen }}"></a><br/>
+											<a href="{% url 'producto_ficha' pro.idProducto %}" class="title">{{ pro.nomProducto}}</a><br/>
+											<p>{{ pro.descripcion}}</p>
+											<p class="price">$ {{ pro.precio}}</p>
+										</div>
+									</li>
+								{% endfor %}	
+					</div>
+			</section>	
+			<section class="our_client">
+				<h4 class="title"><span class="text">Nuestras Marcas</span></h4>
+				<div class="row">					
+					<div class="span2">
+						<a href=""><img alt="" src="../static/core/img/images/marca1.png"></a>
+					</div>
+					<div class="span2">
+						<a href=""><img alt="" src="../static/core/img/images/marca2.png"></a>
+					</div>
+					<div class="span2">
+						<a href=""><img alt="" src="../static/core/img/images/marca3.png"></a>
+					</div>
+					<div class="span2">
+						<a href=""><img alt="" src="../static/core/img/images/marca4.png"></a>
+					</div>
+					<div class="span2">
+						<a href=""><img alt="" src="../static/core/img/images/marca5.png"></a>
+					</div>
+				</div>
+			</section>
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span3 abajo">
+						<h4>Navegar</h4>
+						<ul class="nav">
+							<li><a href="index.html">Inicio</a></li>  
+							<li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+							<li><a href="registro.html">Registrate</a></li>
+							<li><a href="login.html">Inicio de sesion</a></li>							
+						</ul>					
+					</div>						
+				</div>	
+			</section>
+		</div>
+		<script src="../../static/core/css/themes/js/common.js"></script>
+		<script src="../../static/core/css/themes/js/jquery.flexslider-min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).ready(function() {
+					$('.flexslider').flexslider({
+						animation: "fade",
+						slideshowSpeed: 4000,
+						animationSpeed: 600,
+						controlNav: false,
+						directionNav: true,
+						controlsContainer: ".flex-container" // the container that holds the flexslider
+					});
+				});
+			});
+		</script>
+    </body>
+</html>
