@@ -67,7 +67,8 @@ def iniciar_sesion(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect(home)
-
+    
+@csrf_exempt
 def mainAdministrador(request):
     data = {"list": Producto.objects.all().order_by('idProducto')}
     return render(request, "core/main_administrador.html", data)

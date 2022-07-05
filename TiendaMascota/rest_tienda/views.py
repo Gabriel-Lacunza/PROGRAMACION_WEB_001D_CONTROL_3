@@ -29,13 +29,13 @@ def lista_productos(request):
         else:
             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def producto_read_all(request):
     if request.method == 'GET':
         list = Producto.objects.all()
         serializer = ProductoSerializer(list, many=True)
         return Response(serializer.data)
-
+        
 
 class producto_create(APIView):
     def post(self, request, format=None):
