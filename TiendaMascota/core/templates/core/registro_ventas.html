@@ -89,7 +89,7 @@
 						<tr>
 							<td align="center">{{ pro.id }}</td>
 							<td align="center">{{ pro.fecha }}</td>
-							<td align="center">{{ pro.usuario.username }}</td>
+							<td align="center">{{ pro.usuario.first_name }} {{ pro.usuario.last_name}}</td>
 							<td align="center">{{ pro.usuario.perfilusuario.suscripcionUsusario}}</td>
 							<td align="center">{{ pro.estado }}</td>
 							<td><a href="{% url 'detalle_factura' pro.id %}" 

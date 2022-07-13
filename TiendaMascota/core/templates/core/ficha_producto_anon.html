@@ -70,18 +70,16 @@
 									<strong>PRODUCTO DISPONIBLE</span><br>								
 								</address>									
 							</div>
+							{% if user.is_authenticated %}
 							<div class="span5">
-								<label>Cantidad:</label>
-								<input type="text" class="span1" placeholder="1">
-								<br>
 								<form method="GET">
-									<input type="submit" class="btn btn-primary" value="Comprar">
-									<a class="btn btn-info btnwidth" href="{% url 'comprar_producto' producto.idProducto %}">comprar</a>
+									<a class="btn btn-primary btnwidth" href="{% url 'comprar_producto' producto.idProducto %}">comprar</a>
 									{% if mesg %}
 										<div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
 									{% endif %}
 								</form>
 							</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>

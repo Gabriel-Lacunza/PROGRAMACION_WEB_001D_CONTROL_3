@@ -48,7 +48,7 @@
 		<div id="wrapper" class="container">				
 			<section class="main-content">
 			    <br>
-				<h2><span>Detalle Factura</span></h2>
+				<h2><span>Detalle Factura #{{ detalle.factura_id }}</span></h2>
                 <div class="span5">
 					{% if form %}
 					<form method="POST" action="" enctype="multipart/form-data" id="formulario">
@@ -90,7 +90,7 @@
 						<tr>
 							<td align="center">{{ detalle.factura_id }}</td>
 							<td align="center">{{ detalle.cateProducto }}</td>
-							<td align="center">$ {{ detalle.nomProducto }}</td>
+							<td align="center">{{ detalle.nomProducto }}</td>
 							<td align="center">{{ detalle.precio}}</td>
 							<td align="center">{{ detalle.porcDesctoSubscriptor}}%</td>
 							<td align="center">{{ detalle.porcDesctoOferta}}%</td>
