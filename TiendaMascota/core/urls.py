@@ -6,7 +6,8 @@ from core.views import *
 from django.contrib.auth.models import User
 from .views_poblar_bd import *
 from .views_comprar_produ import *
-
+from django.views.generic.base import TemplateView
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', home, name="home"),
     path('poblar_bd', poblar_bd, name="poblar_bd"),
@@ -24,4 +25,7 @@ urlpatterns = [
     path('comprar_producto/<id>', comprar_producto, name="comprar_producto"),
     path('registro_ventas', registro_ventas, name="registro_ventas"),
     path('detalle_factura/<id>', detalle_factura, name="detalle_factura"),
+    path('mis_compras/<id>', mis_compras, name="mis_compras"),
+    path('password_cambiada', TemplateView.as_view(template_name='core/password_cambiada.html'), name='password_cambiada'),
+    path('cambiar_password', auth_views.PasswordChangeView.as_view(template_name='core/cambiar_password.html', success_url='/password_cambiada'), name='cambiar_password')
 ]

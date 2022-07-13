@@ -37,11 +37,20 @@
 							<a href="index.html" class="logo pull-left"><img src="../../static/core/css/themes/images/logo.png" class="site_logo" alt=""></a>
 						</div>
 						<div class="pull-right">		
-							<li><a href="{% url 'home' %}">Inicio</a></li>
-							<li><a href="{% url 'sobre_nosotros' %}">Nosotros</a></li>
-							<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
-							<li><a href="{% url 'mainAdministrador' %}">Main Administrador</a></li>
-						</div>			
+							{% if user.is_authenticated %}
+								{% if user.is_staff %}
+									<li><a href="{% url 'mainAdministrador' %}">Main Administrador</a></li>
+								{% endif %}
+								<li><a href="{% url 'mi_perfil' %}">Mi Perfil</a></li>
+								<li><a href="{% url 'mis_compras' user.id %}">Mis Compras</a></li>
+								<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+								<li>{{ user.first_name}}</li>
+							{% else %}
+								<li><a href="{% url 'registrar_usuario' %}">Registrate</a></li>
+								<li><a href="{% url 'iniciar_sesion' %}">Ingresar</a></li>
+							{% endif %}
+						</div>	
+								
 					</ul>
 			</div>
 		</div>
@@ -99,10 +108,11 @@
 						
 					</tbody>
 				</table>
-				
-				<br>
-				<a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
-				<a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+				{% if user.is_staff %}
+					<br>
+					<a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
+					<a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+				{% endif %}
 			</section>			
 		</div>
 		<script src="themes/js/common.js"></script>

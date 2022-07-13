@@ -48,7 +48,7 @@ class PerfilUsuarioForm(Form):
     email = forms.CharField(max_length=254, required=True, label="Correo")
     rutUsuario = forms.CharField(max_length=80, required=False, label="Rut")
     direccionUsusario = forms.CharField(max_length=80, required=False, label="Dirección")
-    password=forms.CharField(widget=forms.PasswordInput(),required=True,label="Contraseña")
+   #password=forms.CharField(widget=forms.PasswordInput(),required=True,label="Contraseña")
 
     class Meta:
         fields = '__all__'

@@ -223,3 +223,9 @@ def detalle_factura(request, id):
     detalle = DetalleFactura.objects.get(factura_id=id)
     data = {"detalle":  detalle}
     return render(request, "core/detalle_factura.html", data)
+
+def mis_compras(request, id):
+    factura = Factura.objects.filter(usuario_id=id)
+    detalle = DetalleFactura.objects.filter(factura_id=factura)
+    data = {"list": Factura.objects.filter(usuario_id=id), "detalle":detalle}
+    return render(request, "core/mis_compras.html", data)
