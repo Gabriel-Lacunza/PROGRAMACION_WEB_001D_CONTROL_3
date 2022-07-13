@@ -19,7 +19,6 @@ urlpatterns = [
     path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
     path('maestro_bodega/<action>/<id>', maestro_bodega, name="maestro_bodega"),
     path('inicio_cliente', inicio_cliente, name='inicio_cliente'),
-    path('mis_datos/<id>', mis_datos, name="mis_datos"),
     path('maestro_usuario/<action>/<id>', maestro_usuario, name="maestro_usuario"),
     path('mi_perfil', mi_perfil, name="mi_perfil"),
     path('comprar_producto/<id>', comprar_producto, name="comprar_producto"),

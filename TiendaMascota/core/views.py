@@ -153,10 +153,6 @@ def maestro_bodega(request, action, id):
     data["list"] = Producto.objects.all().order_by('idProducto')
     return render(request, "core/maestro_bodega.html", data)
 
-def mis_datos(request,id):
-    data = {"mesg": "", "form": RegistroForm, "id": id}
-    return render(request, "core/mis_datos.html", data)
-
 def maestro_usuario(request,action, id):
     if not (request.user.is_authenticated and request.user.is_staff):
         return redirect(home)

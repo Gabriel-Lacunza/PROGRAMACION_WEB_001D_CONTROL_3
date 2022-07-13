@@ -44,7 +44,6 @@
 								{% endif %}
 								<li><a href="{% url 'mi_perfil' %}">Mi Perfil</a></li>
 								<li><a href="{% url 'mis_datos' user.id %}">Mis Datos</a></li>
-								<li><a href="{% url 'mis_datos' user.id %}">Mis Compras</a></li>
 								<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
 								<li>{{ user.first_name}}</li>
 							{% else %}
