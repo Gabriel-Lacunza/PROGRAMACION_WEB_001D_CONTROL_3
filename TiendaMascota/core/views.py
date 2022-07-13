@@ -133,23 +133,17 @@ def maestro_bodega(request, action, id):
     if not (request.user.is_authenticated and request.user.is_staff):
         return redirect(home)
     data = {"mesg": "", "form": BodegaForm, "action": action, "id": id}
+    #que el siguiente comando solo guarde la cantidad de productos
     if action == 'upd':
         objeto = Producto.objects.get(idProducto=id)
         if request.method == "POST":
-            form = BodegaForm(data=request.POST, files=request.FILES, instance=objeto)
-            if form.is_valid:
-                form.save()
+            form = BodegaForm(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                objeto.cantidad = form.cleaned_data["cantidad"]
+                objeto.save()
                 data["mesg"] = "¡El Producto fue actualizado correctamente!"
         data["form"] = BodegaForm(instance=objeto)
- 
-    elif action == 'del':
-        try:
-            Producto.objects.get(idProducto=id).delete()
-            data["mesg"] = "¡El Producto fue eliminado correctamente!"
-            return redirect(Producto, action='ins', id = '-1')
-        except:
-            data["mesg"] = "¡El Producto ya estaba eliminado!"
- 
+    
     data["list"] = Producto.objects.all().order_by('idProducto')
     return render(request, "core/maestro_bodega.html", data)
 
