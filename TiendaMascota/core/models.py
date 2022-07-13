@@ -43,12 +43,18 @@ class Factura(models.Model):
 
 class DetalleFactura(models.Model):
     factura = models.ForeignKey(Factura, on_delete=models.CASCADE)
-    nroItem = models.IntegerField(blank=False, null=False, verbose_name="Nro Factura")
+    nomProducto = models.CharField(max_length=300,blank=False, null=True, verbose_name="Nombre Producto")
     precio = models.IntegerField(blank=False, null=False, verbose_name="Precio")
     direccionUsusario = models.CharField(max_length=300, blank=False, null=False, verbose_name="Direccion Usuario")
-    suscripcionUsusario = models.BooleanField(default=False,blank=False, null=False, verbose_name="Suscriptor")
     precioFinal = models.IntegerField(blank=False, null=False, verbose_name="Precio Final")
+    porcDesctoSubscriptor = models.IntegerField(blank=False, null=False, default=0,verbose_name="Porcentaje Descuento Suscriptor")
+    porcDesctoOferta = models.IntegerField(blank=False, null=False, default=0,verbose_name="Porcentaje Descuento Oferta")
+    cateProducto = models.CharField(max_length=300,blank=False, null=True, verbose_name="Categoria Producto")
+    
+    
 
     def __str__(self):
         return self.id
+
+
 

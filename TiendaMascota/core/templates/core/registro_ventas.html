@@ -3,166 +3,123 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Bootstrap E-commerce Templates</title>
+		<title>Shopper</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
-		
 		<!-- bootstrap -->
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
-		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
-		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
-		<link href="themes/css/adicion.css" rel="stylesheet"/>
+		<link href="../../static/core/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="../../static/core/css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		
+		<link href="../../static/core/css/themes/css/bootstrappage.css" rel="stylesheet"/>
 		
 		<!-- global styles -->
-		<link href="themes/css/main.css" rel="stylesheet"/>
-		<link href="themes/css/jquery.fancybox.css" rel="stylesheet"/>
-				
+		<link href="../../static/core/css/themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="../../static/core/css/themes/css/main.css" rel="stylesheet"/>
+
 		<!-- scripts -->
-		<script src="themes/js/jquery-1.7.2.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>				
-		<script src="themes/js/superfish.js"></script>	
-		<script src="themes/js/jquery.scrolltotop.js"></script>
-		<script src="themes/js/jquery.fancybox.js"></script>
+		<script src="../../static/core/css/themes/js/jquery-1.7.2.min.js"></script>
+		<script src="../../static/core/css/bootstrap/js/bootstrap.min.js"></script>				
+		<script src="../../static/core/css/themes/js/superfish.js"></script>	
+		<script src="../../static/core/css/themes/js/jquery.scrolltotop.js"></script>
+		<link href="{% static 'core/css/forms.css'%}" rel="stylesheet">
 		<!--[if lt IE 9]>			
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
-		<link rel="icon" type="image/png" href="themes/images/logo.png">
+		<link rel="icon" type="image/png" href="../../static/core/css/themes/images/logo.png">
 	</head>
     <body>		
 		<div id="top-bar" class="container">
 			<div class="row container-fluid">
 					<ul class="user-menu">
 						<div class="pull-left">
-							<a href="index.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>
+							<a href="index.html" class="logo pull-left"><img src="../../static/core/css/themes/images/logo.png" class="site_logo" alt=""></a>
 						</div>
-						<div class="pull-right">	
-							<li><a href="index.html">Inicio</a></li>
-							<li><a href="administrar_tienda.html">Administrar Tienda</a></li>
-							<li><a href="sobre_nosotros.html">Nosotros</a></li>
-							<li><a href="index.html">Cerrar Sesión</a></li>	
-						</div>
-									
-								
+						<div class="pull-right">		
+							<li><a href="{% url 'home' %}">Inicio</a></li>
+							<li><a href="{% url 'sobre_nosotros' %}">Nosotros</a></li>
+							<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+							<li><a href="{% url 'maestro_producto' 'ins' -1 %}">Mantenedor Productos</a></li>
+						</div>			
 					</ul>
 			</div>
 		</div>
-		<div id="wrapper" class="container">
-			<div style="text-align: center;" class="span9">
-                <h1>
-                    <a>Registro de ventas</a>
-                </h1>
-            </div>
-			<br>
-			<div>
-				<section class="main-content">				
-					<div class="row">
-						<div class="span9">
-							<br>
-							<br>
-							<table style="width: 80%; border: 1px solid black; border-collapse: collapse; margin-right: auto; margin-left: auto;">
-								<thead style="background-color: gray;">
-									<tr>
-										<td>Nro Factura</td>
-										<td>Fecha</td>
-										<td>Nombre Cliente</td>
-										<td>Suscrito</td>
-										<td>Monto total</td>
-										<td>Estado Actual</td>
-										<td>Detalle</td>
-										<td>Cambiar estado</td>
-										<td></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr style="background-color: rgb(168, 164, 164);">
-										<td>425</td>
-										<td>5/10/2022</td>
-										<td>Juan Perez</td>
-										<td><input type="checkbox" id=""></td>
-										<td>$200000</td>
-										<td>Entregado</td>
-										<td><button style="width:min-content;"><a href="detalle_factura.html">detalle</a></button></td>
-										<td><button style="width:min-content;"><a>despachado</a></button><td><button style="width:min-content;"><a>entregado</a></button></td></td>
-									</tr>
-									<tr style="background-color: rgb(168, 164, 164);">
-										<td>425</td>
-										<td>5/10/2022</td>
-										<td>Juan Perez</td>
-										<td><input type="checkbox" id=""></td>
-										<td>$200000</td>
-										<td>Entregado</td>
-										<td><button style="width:min-content;"><a href="detalle_factura.html">detalle</a></button></td>
-										<td><button style="width:min-content;"><a>despachado</a></button><td><button style="width:min-content;"><a>entregado</a></button></td></td>
-									</tr>
-									<tr style="background-color: rgb(168, 164, 164);">
-										<td>425</td>
-										<td>5/10/2022</td>
-										<td>Juan Perez</td>
-										<td><input type="checkbox" id=""></td>
-										<td>$200000</td>
-										<td>Entregado</td>
-										<td><button style="width:min-content;"><a href="detalle_factura.html">detalle</a></button></td>
-										<td><button style="width:min-content;"><a>despachado</a></button><td><button style="width:min-content;"><a>entregado</a></button></td></td>
-									</tr>
-								</tbody>
-							</table>
+		<div id="wrapper" class="container">				
+			<section class="main-content">
+			    <br>
+				<h2><span>Historial de Ventas</span></h2>
+                <div class="span5">
+					{% if form %}
+					<form method="POST" action="" enctype="multipart/form-data" id="formulario">
+						<div class="form-group">
+							{% csrf_token %} {{ form.as_p }}
 						</div>
-						<br>
-					</div>
-				</section>
-			</div>
-			{% if form %}
-			<form method="POST" action="" enctype="multipart/form-data" id="formulario">
-				<div class="form-group">
-					{% csrf_token %} {{ form.as_p }}
+						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
+						<!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
+						{% if id != '-1' %}
+						<a class="btn btn-danger btnwidth" href="{% url 'maestro_bodega' 'del' id %}">Eliminar</a>
+						{% endif %}
+						<a class="btn btn-info btnwidth" href="{% url 'home' %}">Inicio</a>
+						{% if mesg %}
+						<div id="form_message" class="alert alert-info" role="alert">{{ mesg }}</div>
+						{% endif %}
+					</form>
+					{% endif %}
+			
 				</div>
-				<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
-				<!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
-				<a class="btn btn-success btnwidth" href="{% url 'maestro_producto' 'ins' -1 %}">Nuevo</a>
-				{% if id != '-1' %}
-				<a class="btn btn-danger btnwidth" href="{% url 'maestro_producto' 'del' id %}">Eliminar</a>
-				{% endif %}
-				<a class="btn btn-info btnwidth" href="{% url 'home' %}">Inicio</a>
-				{% if mesg %}
-				<div id="form_message" class="alert alert-info" role="alert">{{ mesg }}</div>
-				{% endif %}
-			</form>
-			{% endif %}
-			<section id="footer-bar">
-				<div class="row">
-					<div class="span3 abajo">
-						<h4>Navegar</h4>
-						<ul class="nav">
-							<li><a href="index.html">Inicio</a></li>  
-							<li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
-							<li><a href="registro.html">Registrate</a></li>
-							<li><a href="login.html">Inicio de sesion</a></li>							
-						</ul>					
-					</div>						
-				</div>	
 			</section>
 		</div>
+		<div id="wrapper" class="container">
+			<section class="main-content">				
+				{% if list %}
+				<table id="tabla_datos">
+					<thead>
+						<tr>
+							<th>Nro Factura</th>
+							<th>Fecha</th>
+							<th>Nombre Cliente</th>
+							<th>Suscricion</th>
+							<th>Estado</th>
+							<th>Detalle</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for pro in list %}
+						<tr>
+							<td align="center">{{ pro.id }}</td>
+							<td align="center">{{ pro.fecha }}</td>
+							<td align="center">{{ pro.usuario.username }}</td>
+							<td align="center">{{ pro.usuario.perfilusuario.suscripcionUsusario}}</td>
+							<td align="center">{{ pro.estado }}</td>
+							<td><a href="{% url 'detalle_factura' pro.id %}" 
+								class="btn btn-primary btn-sm boton_chico">Detalle</a></td>
+							{% comment %} <td align="center">
+								<a href="{% url 'maestro_bodega' 'upd' pro.idProducto %}" 
+									class="btn btn-primary btn-sm boton_chico">Editar
+								</a>
+								<a href="{% url 'maestro_bodega' 'del' pro.idProducto %}" 
+									class="btn btn-danger btn-sm boton_chico">Eliminar
+								</a>
+							</td> {% endcomment %}
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% endif %}
+				<br>
+				<a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
+				<a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+			</section>			
+		</div>
 		<script src="themes/js/common.js"></script>
+		<script src="ajax1.js"></script>
 		<script>
-			$(function () {
-				$('#myTab a:first').tab('show');
-				$('#myTab a').click(function (e) {
-					e.preventDefault();
-					$(this).tab('show');
-				})
-			})
 			$(document).ready(function() {
-				$('.thumbnail').fancybox({
-					openEffect  : 'none',
-					closeEffect : 'none'
-				});
-				
-				$('#myCarousel-2').carousel({
-                    interval: 2500
-                });								
+				$('#checkout').click(function (e) {
+					document.location.href = "checkout.html";
+				})
 			});
-		</script>
+		</script>		
     </body>
 </html>

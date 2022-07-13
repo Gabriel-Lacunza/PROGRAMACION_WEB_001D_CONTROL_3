@@ -217,21 +217,13 @@ def mi_perfil(request):
     data["form"] = form
     return render(request, "core/mi_perfil.html", data)
 
-def compra_exitosa(request,id):
-    if request.method == "GET":
-        user = User.objects.get(user)
-        perfil = PerfilUsuario.objects.get(user=user)
-        producto = PerfilUsuario.objects.get(idProducto=id)
-        form = PerfilUsuarioForm()
+def registro_ventas(request):
+    data = {"mesg": ""}
 
-        context = {
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "email": user.email,
-            "rut": perfil.rut,
-            "direccion": perfil.direccion,
-        }
+    data["list"] = Factura.objects.all().order_by('id')
+    return render(request, "core/registro_ventas.html", data)
 
-        return render(request, "core/pago_exitoso.html", context)
-    else:
-        return redirect(home)
+def detalle_factura(request, id):
+    detalle = DetalleFactura.objects.get(factura_id=id)
+    data = {"detalle":  detalle}
+    return render(request, "core/detalle_factura.html", data)
