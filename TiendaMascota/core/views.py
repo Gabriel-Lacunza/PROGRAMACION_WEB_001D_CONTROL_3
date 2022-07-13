@@ -24,11 +24,10 @@ def home(request):
     else:
         return render(request, "core/inicio_cliente.html")
 
-def producto_tienda(request):
+""" def producto_tienda(request):
     data = {"list": Producto.objects.all().order_by('nomProducto')}
     return render(request, "core/inicio_anonimo.html", data)
-
-
+"""
 def inicio_cliente(request):
     model = Producto
     data = {"list": Producto.objects.all().order_by('nomProducto')}
@@ -37,8 +36,6 @@ def inicio_cliente(request):
         return render(request, "core/inicio_cliente.html", prodis)
     else:
         return render(request, "core/inicio_cliente.html")
-
-    #return render(request, "core/inicio_cliente.html", data)
 
 def iniciar_sesion(request):
     data = {"mesg": "", "form": IniciarSesionForm()}
@@ -67,9 +64,10 @@ def iniciar_sesion(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect(home)
-    
-@csrf_exempt
+
 def mainAdministrador(request):
+    if not (request.user.is_authenticated and request.user.is_staff):
+        return redirect(home)
     data = {"list": Producto.objects.all().order_by('idProducto')}
     return render(request, "core/main_administrador.html", data)
 
@@ -96,6 +94,8 @@ def sobre_nosotros(request):
     return render(request, "core/sobre_nosotros.html")
 
 def maestro_producto(request, action, id):
+    if not (request.user.is_authenticated and request.user.is_staff):
+        return redirect(home)
     data = {"mesg": "", "form": ProductoForm, "action": action, "id": id}
  
     if action == 'ins':
@@ -115,6 +115,7 @@ def maestro_producto(request, action, id):
             if form.is_valid:
                 form.save()
                 data["mesg"] = "¡El Producto fue actualizado correctamente!"
+        form
         data["form"] = ProductoForm(instance=objeto)
  
     elif action == 'del':
@@ -129,8 +130,9 @@ def maestro_producto(request, action, id):
     return render(request, "core/maestro_producto.html", data)
 
 def maestro_bodega(request, action, id):
+    if not (request.user.is_authenticated and request.user.is_staff):
+        return redirect(home)
     data = {"mesg": "", "form": BodegaForm, "action": action, "id": id}
-    
     if action == 'upd':
         objeto = Producto.objects.get(idProducto=id)
         if request.method == "POST":
@@ -156,17 +158,35 @@ def mis_datos(request,id):
     return render(request, "core/mis_datos.html", data)
 
 def maestro_usuario(request,action, id):
-    #perfil = PerfilUsuario.objects.all()
-    #data = {"perfiles": PerfilUsuario}
-    data = {"list": PerfilUsuario.objects.all()}
-    if action == 'upd':
-        objeto = PerfilUsuario.objects.get(user_id=id)
+    if not (request.user.is_authenticated and request.user.is_staff):
+        return redirect(home)
+
+    data = {"mesg": "", "form": Usuarios, "action": action, "id": id}
+
+    if action == 'ins':
         if request.method == "POST":
-            form = MantUsuarios(data=request.POST, files=request.FILES, instance=objeto)
+            form = MantUsuarioForm(request.POST, request.FILES)
+            if form.is_valid:
+                try:
+                    form.save()
+                    data["mesg"] = "¡El Usuario fue creado correctamente!"
+                except:
+                    data["mesg"] = "¡No se puede crear dos Usuarios con el mismo ID!"
+    elif action == 'upd':
+        objeto = PerfilUsuario.objects.get(id=id)
+        if request.method == "POST":
+            form = Usuarios(data=request.POST, files=request.FILES, instance=objeto)
             if form.is_valid:
                 form.save()
                 data["mesg"] = "¡El Producto fue actualizado correctamente!"
-        data["form"] = MantUsuarios()
+        data["form"] = Usuarios(instance=objeto)
+    elif action == 'del':
+        try:
+            Producto.objects.get(idProducto=id).delete()
+            data["mesg"] = "¡El Producto fue eliminado correctamente!"
+            return redirect(Producto, action='ins', id = '-1')
+        except:
+            data["mesg"] = "¡El Producto ya estaba eliminado!"
     data["list"] = PerfilUsuario.objects.all().order_by('user_id')
     return render(request, "core/maestro_usuario.html", data)
 
@@ -179,6 +199,7 @@ def mi_perfil(request):
             user.first_name = request.POST.get("first_name")
             user.last_name = request.POST.get("last_name")
             user.email = request.POST.get("email")
+            user.password = request.POST.get("password")
             user.save()
             perfil = PerfilUsuario.objects.get(user=user)
             perfil.rutUsuario = request.POST.get("rutUsuario")
@@ -214,12 +235,3 @@ def compra_exitosa(request,id):
         return render(request, "core/pago_exitoso.html", context)
     else:
         return redirect(home)
-
-def carrito(request):
-    return render(request, "core/carrito.html")
-
-def mis_compras(request):
-    return render(request, "core/mis_compras.html")
-
-def detalle_factura(request):
-    return render(request, "core/detalle_factura.html")

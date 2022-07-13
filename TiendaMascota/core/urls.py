@@ -4,9 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from core.views import *
 from django.contrib.auth.models import User
+from .views_poblar_bd import *
 
 urlpatterns = [
     path('', home, name="home"),
+    path('poblar_bd', poblar_bd, name="poblar_bd"),
     path('producto_ficha_anon/<id>', producto_ficha, name="producto_ficha"),
     path('sobre_nosotros', sobre_nosotros, name="sobre_nosotros"),
     path('registrar/', registrar_usuario, name="registrar_usuario"),
@@ -20,7 +22,4 @@ urlpatterns = [
     path('maestro_usuario/<action>/<id>', maestro_usuario, name="maestro_usuario"),
     path('mi_perfil', mi_perfil, name="mi_perfil"),
     path('compra_exitosa/<action>/<id>', compra_exitosa, name="compra_exitosa"),
-    path('carrito', carrito, name="carrito"),
-    path('mis_compras', mis_compras, name="mis_compras"),
-    path('detalle_factura', detalle_factura, name="detalle_factura"),
 ]

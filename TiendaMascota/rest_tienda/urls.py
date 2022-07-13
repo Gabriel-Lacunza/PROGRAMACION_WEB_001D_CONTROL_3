@@ -9,4 +9,3 @@ urlpatterns = [
     path('producto_update', producto_update.as_view(), name="producto_update"),
     path('login', login, name='login'),
 ]
-

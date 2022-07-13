@@ -48,6 +48,7 @@ class PerfilUsuarioForm(Form):
     email = forms.CharField(max_length=254, required=True, label="Correo")
     rutUsuario = forms.CharField(max_length=80, required=False, label="Rut")
     direccionUsusario = forms.CharField(max_length=80, required=False, label="Dirección")
+    password=forms.CharField(widget=forms.PasswordInput(),required=True,label="Contraseña")
 
     class Meta:
         fields = '__all__'
@@ -73,14 +74,26 @@ class Usuarios(UserCreationForm):
                 'imagenUsuario',
             ]
 
-class MantUsuarios(Form):
-    user_name = forms.CharField(max_length=150, required=True)
-    is_staff = forms.BooleanField(required=True)
-    is_active = forms.BooleanField(required=True)
+class MantUsuarioForm(ModelForm):
+    user_id=forms.IntegerField(required=True,label="Nombres")
+    is_staff=forms.BooleanField(required=True)
+    rutUsuario = forms.CharField(required=True)
+    first_name = forms.CharField(max_length=150, required=True)
+    last_name = forms.CharField(max_length=150, required=True)
+    email = forms.CharField(required=True)
+    direccionUsusario = forms.CharField(required=True)
+    suscripcionUsusario = forms.BooleanField(required=False)
+    imagenUsuario = forms.ImageField(required=False)
+    password=forms.CharField(required=True)
     class Meta:
         model = User
         fields = [
                 'username',
-                'is_staff',
-                'is_active',
+                'first_name',
+                'last_name',
+                'email',
+                'rutUsuario',
+                'direccionUsusario',
+                'suscripcionUsusario',
+                'imagenUsuario',
             ]

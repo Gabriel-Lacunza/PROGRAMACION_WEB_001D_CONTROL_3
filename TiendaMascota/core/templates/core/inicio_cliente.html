@@ -44,8 +44,7 @@
 								{% endif %}
 								<li><a href="{% url 'mi_perfil' %}">Mi Perfil</a></li>
 								<li><a href="{% url 'mis_datos' user.id %}">Mis Datos</a></li>
-								<li><a href="{% url 'mis_compras' %}">Mis Compras</a></li>
-								<li><a href="{% url 'carrito' %}">Carrito</a></li>
+								<li><a href="{% url 'mis_datos' user.id %}">Mis Compras</a></li>
 								<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
 								<li>{{ user.first_name}}</li>
 							{% else %}
@@ -73,24 +72,24 @@
 				Bienvenido a Shopper tu tienda amigable de mascotas
 			</section>
 			<!--<section class="main-content">-->
-					<div class="row">
-								{% if messages == 'No'%}
-									<div class="alert alert-secondary header_text" role="informaci" align="center">
-									<h1>NO HAY PRODUCTOS DISPONIBLES</h1>
-									</div>
-								{% endif %}															
-								{% for pro in list %}
-									<li class="span2">
-										<div class="product-box">
-											<span class="sale_tag"></span>												
-											<a href="{% url 'producto_ficha' pro.idProducto %}"><img alt="" src="/media/{{ pro.imagen }}"></a><br/>
-											<a href="{% url 'producto_ficha' pro.idProducto %}" class="title">{{ pro.nomProducto}}</a><br/>
-											<p>{{ pro.descripcion}}</p>
-											<p class="price">$ {{ pro.precio}}</p>
-										</div>
-									</li>
-								{% endfor %}	
-					</div>
+			<section class="container">
+				<div class="row text-center">
+					<ul class="thumbnails ">														
+					{% for pro in list %}
+						
+							<li class="span3">
+								<div class="product-box">
+									<span class="sale_tag"></span>												
+									<a href="{% url 'producto_ficha' pro.idProducto %}"><img class="tienda_auto_imagen" alt="" src="/media/{{ pro.imagen }}"></a><br/>
+									<a href="{% url 'producto_ficha' pro.idProducto %}" class="title">{{ pro.nomProducto}}</a><br/>
+									<p>{{ pro.descripcion}}</p>
+									<p class="price">$ {{ pro.precio}}</p>
+								</div>
+							</li>
+						
+					{% endfor %}
+				</ul>	
+				</div>
 			</section>	
 			<section class="our_client">
 				<h4 class="title"><span class="text">Nuestras Marcas</span></h4>

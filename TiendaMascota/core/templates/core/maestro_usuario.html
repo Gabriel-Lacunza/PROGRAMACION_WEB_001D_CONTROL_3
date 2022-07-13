@@ -56,7 +56,7 @@
 							{% csrf_token %} {{ form.as_p }}
 						</div>
 						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
-						<!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
+						<a class="btn btn-success btnwidth" href="{% url 'maestro_usuario' 'upd' id %}">Nuevo</a>
 						<button class="btn btn-primary" type="submit">Actualizar datos de perfil</button>
 					</form>
 					{% endif %}
@@ -69,9 +69,9 @@
 				<table id="tabla_datos">
 				<thead>
 					<tr>
-						<th>ID Usuario</th>
-						<th>Username</th>
-						<th>Nombres</th>
+						<th>ID Producto</th>
+						<th>Nombre</th>
+						<th>Descripcion</th>
 
 						<th class="titulo_boton">Editar</th>
 						<th class="titulo_boton">Eliminar</th>
@@ -83,7 +83,7 @@
 						<tr>
 							<td>{{ pro.user.id }}</td>
 							<td>{{ pro.user.username }}</td>
-							<td>{{ pro.user.first_name}}</td>	
+							<td>{{ pro.user.password}}</td>	
 							<td><a href="{% url 'maestro_usuario' 'upd' pro.user.id %}" 
 								class="btn btn-primary btn-sm boton_chico">Editar</a></td>
 							<td><a href="{% url 'maestro_usuario' 'upd' pro.user.id %}" 
