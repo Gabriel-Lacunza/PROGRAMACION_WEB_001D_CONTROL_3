@@ -34,8 +34,7 @@ class PerfilUsuario(models.Model):
         return f"{self.user.username}  {self.user.first_name} {self.user.last_name} {self.user.email}"
 
 class Factura(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    nroFactura = models.IntegerField(blank=False, null=False, verbose_name="Nro Item")   
+    usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING) 
     fecha = models.DateField(blank=False, null=False, verbose_name="Fecha Factura")
     estado = models.CharField(max_length=1, default="B",blank=False, null=False, verbose_name="Fecha Factura")
 

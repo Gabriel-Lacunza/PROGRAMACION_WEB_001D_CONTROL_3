@@ -76,6 +76,7 @@
 								<br>
 								<form method="GET">
 									<input type="submit" class="btn btn-primary" value="Comprar">
+									<a class="btn btn-info btnwidth" href="{% url 'comprar_producto' producto.idProducto %}">comprar</a>
 									{% if mesg %}
 										<div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
 									{% endif %}
