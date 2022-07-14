@@ -39,7 +39,6 @@
 							<li><a href="{% url 'home' %}">Inicio</a></li>
 							<li><a href="{% url 'sobre_nosotros' %}">Nosotros</a></li>
 							{% if user.is_authenticated %}
-							<li><a href="{% url 'mis_datos' user.id %}">Mis Datos</a></li>
 							<li><a href="{% url 'mis_compras' user.id %}">Mis Compras</a></li>
 							<li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
 							<li>{{ user.first_name}}</li>
