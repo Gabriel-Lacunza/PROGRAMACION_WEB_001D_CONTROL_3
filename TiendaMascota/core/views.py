@@ -115,7 +115,6 @@ def maestro_producto(request, action, id):
             if form.is_valid:
                 form.save()
                 data["mesg"] = "¡El Producto fue actualizado correctamente!"
-        form
         data["form"] = ProductoForm(instance=objeto)
  
     elif action == 'del':
@@ -125,7 +124,7 @@ def maestro_producto(request, action, id):
             return redirect(Producto, action='ins', id = '-1')
         except:
             data["mesg"] = "¡El Producto ya estaba eliminado!"
- 
+        
     data["list"] = Producto.objects.all().order_by('idProducto')
     return render(request, "core/maestro_producto.html", data)
 
