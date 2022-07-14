@@ -195,7 +195,7 @@ def mi_perfil(request):
             user.first_name = request.POST.get("first_name")
             user.last_name = request.POST.get("last_name")
             user.email = request.POST.get("email")
-            user.password = request.POST.get("password")
+            user.password = request.user.password
             user.save()
             perfil = PerfilUsuario.objects.get(user=user)
             perfil.rutUsuario = request.POST.get("rutUsuario")
