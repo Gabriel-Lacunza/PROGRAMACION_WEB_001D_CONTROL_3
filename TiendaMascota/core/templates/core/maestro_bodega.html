@@ -56,10 +56,9 @@
 						<div class="form-group">
 							{% csrf_token %} {{ form.as_p }}
 						</div>
-						<input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
 						<!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
 						{% if id != '-1' %}
-						<a class="btn btn-danger btnwidth" href="{% url 'maestro_bodega' 'del' id %}">Eliminar</a>
+						<input type="submit" class="btn btn-primary btnwidth" href="{% url 'maestro_bodega' 'upd' id %}" id="id_guardar" value="Guardar">
 						{% endif %}
 						<a class="btn btn-info btnwidth" href="{% url 'home' %}">Inicio</a>
 						{% if mesg %}
@@ -96,9 +95,6 @@
 							<td align="center">
 								<a href="{% url 'maestro_bodega' 'upd' pro.idProducto %}" 
 									class="btn btn-primary btn-sm boton_chico">Editar
-								</a>
-								<a href="{% url 'maestro_bodega' 'del' pro.idProducto %}" 
-									class="btn btn-danger btn-sm boton_chico">Eliminar
 								</a>
 							</td>
 						</tr>
